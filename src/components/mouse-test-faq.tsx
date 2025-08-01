@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { HelpCircle } from 'lucide-react'
 
 const MouseTestFAQ = () => {
@@ -97,9 +97,9 @@ const MouseTestFAQ = () => {
                 <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${getCategoryColor(faq.category)} flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300 border-2 border-current`}>
                   <HelpCircle className="w-5 h-5 text-black" />
                 </div>
-                <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors duration-300 font-mono font-bold text-electric-400 group-hover:text-neon-green-400">
+                <h2 className="text-lg leading-tight group-hover:text-primary transition-colors duration-300 font-mono font-bold text-electric-400 group-hover:text-neon-green-400">
                   {faq.question}
-                </CardTitle>
+                </h2>
               </div>
             </CardHeader>
             <CardContent>
