@@ -1,8 +1,8 @@
-import HeroSection from '@/components/layout/hero-section'
-import NavigationSection from '@/components/layout/navigation-section'
-import Footer from '@/components/layout/footer'
-import MouseButtonTest from '@/components/features/mouse-button-test'
-import MouseTestFAQ from '@/components/features/mouse-test-faq'
+import HeroSection from '@/components/layout/HeroSection'
+import NavigationSection from '@/components/layout/NavigationSection'
+import Footer from '@/components/layout/Footer'
+import MouseButtonTest from '@/components/features/MouseButtonTest'
+import MouseTestFaq from '@/components/features/MouseTestFaq'
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <NavigationSection />
 
         {/* FAQ Section */}
-        <MouseTestFAQ />
+        <MouseTestFaq />
       </main>
 
       {/* Footer */}
