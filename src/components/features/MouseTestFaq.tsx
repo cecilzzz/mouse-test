@@ -3,8 +3,61 @@ import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/
 import { HelpCircle } from 'lucide-react'
 import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
 
+/**
+ * Props for the MouseTestFaq component
+ */
 interface MouseTestFaqProps {}
 
+/**
+ * MouseTestFaq Component
+ * 
+ * Displays a comprehensive FAQ section about mouse testing with SEO-optimized content.
+ * Features categorized questions and answers covering all aspects of mouse testing.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <MouseTestFaq />
+ * ```
+ * 
+ * @returns {JSX.Element} FAQ section with categorized questions and answers
+ * 
+ * @features
+ * - 10+ comprehensive FAQ items covering mouse testing topics
+ * - Category-based color coding for easy navigation
+ * - SEO-optimized H2 headings for each question
+ * - Responsive grid layout for optimal readability
+ * - Gaming-themed visual design
+ * 
+ * @categories
+ * - basic: General mouse testing information
+ * - button: Mouse button functionality and testing
+ * - cps: Clicks Per Second testing and gaming
+ * - dpi: DPI (Dots Per Inch) sensitivity testing
+ * - performance: Hz testing and performance metrics
+ * - accuracy: Precision and tracking testing
+ * - scroll: Scroll wheel functionality
+ * - troubleshooting: Common issues and solutions
+ * 
+ * @data
+ * Uses FaqItem[] array with properties:
+ * - question: The FAQ question (used as H2 for SEO)
+ * - answer: Detailed answer with technical information
+ * - category: FaqCategory for color coding and organization
+ * 
+ * @design
+ * - Each FAQ card has unique gradient colors based on category
+ * - Hover effects with scaling and glow
+ * - Numbered badges for easy reference
+ * - Gaming-style typography and colors
+ * - Responsive 2-column grid on larger screens
+ * 
+ * @seo
+ * - H2 tags for each question improve search rankings
+ * - Comprehensive content covers mouse testing keywords
+ * - Structured data markup for rich snippets
+ * - Category-based organization aids discoverability
+ */
 const MouseTestFaq: React.FC<MouseTestFaqProps> = () => {
   const faqs: FaqItem[] = [
     {

@@ -1,5 +1,35 @@
+/**
+ * Props for the Footer component
+ */
 interface FooterProps {}
 
+/**
+ * Footer Component
+ * 
+ * Displays the website footer with copyright information and feature highlights.
+ * Maintains the cyberpunk/gaming aesthetic consistent with the overall design.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <Footer />
+ * ```
+ * 
+ * @returns {JSX.Element} The rendered footer section
+ * 
+ * @features
+ * - Copyright notice with current year
+ * - Feature highlights with gaming emojis
+ * - Consistent cyberpunk styling
+ * - Responsive typography
+ * 
+ * @design
+ * - Dark background with subtle border
+ * - JetBrains Mono font for technical aesthetic
+ * - Gaming-themed emojis (🎮, ⚡, 🎯)
+ * - Electric blue accent colors
+ * - Proper spacing and padding
+ */
 const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className="border-t-2 border-neon-green-500/30 bg-black/90">

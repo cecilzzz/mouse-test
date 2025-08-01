@@ -1,8 +1,49 @@
 import { Zap, Target, Mouse, Settings } from 'lucide-react'
 import type { TestTool } from '@/types'
 
+/**
+ * Props for the NavigationSection component
+ */
 interface NavigationSectionProps {}
 
+/**
+ * NavigationSection Component
+ * 
+ * Renders a grid of navigation cards for different mouse testing tools.
+ * Each card represents a specific testing functionality with unique styling.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <NavigationSection />
+ * ```
+ * 
+ * @returns {JSX.Element} A responsive grid of test tool navigation cards
+ * 
+ * @features
+ * - CPS Test: Measures clicks per second for gaming performance
+ * - DPI Test: Checks mouse sensitivity and precision
+ * - Double Click Test: Validates double-click functionality
+ * - Scroll Test: Tests scroll wheel responsiveness
+ * 
+ * @design
+ * - Each card has unique gradient colors and hover effects
+ * - Responsive grid layout (1 column mobile, 2 columns tablet, 4 columns desktop)
+ * - Gaming-themed icons from Lucide React
+ * - Glassmorphism effects with backdrop blur
+ * - Hover animations with scale and glow effects
+ * 
+ * @data
+ * Uses TestTool[] array with properties:
+ * - href: Navigation URL for the test
+ * - icon: Lucide React icon component
+ * - title: Display name of the test
+ * - description: Short description of functionality
+ * - gradient: CSS gradient classes for styling
+ * - border: Border color classes
+ * - iconColor: Icon color classes
+ * - titleColor: Title text color classes
+ */
 const NavigationSection: React.FC<NavigationSectionProps> = () => {
   const testTools: TestTool[] = [
     {

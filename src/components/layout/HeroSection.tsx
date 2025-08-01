@@ -1,7 +1,37 @@
 import { Mouse, Zap, Target, Settings, Terminal } from 'lucide-react'
 
+/**
+ * Props for the HeroSection component
+ */
 interface HeroSectionProps {}
 
+/**
+ * HeroSection Component
+ * 
+ * Displays the main hero section of the Mouse Test website with cyberpunk/gaming aesthetics.
+ * Features animated background effects, gradient text, and feature badges.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <HeroSection />
+ * ```
+ * 
+ * @returns {JSX.Element} The rendered hero section with title, description, and feature badges
+ * 
+ * @features
+ * - Cyberpunk-themed visual design with neon colors
+ * - Animated grid pattern background overlay
+ * - Multiple gradient layers for depth
+ * - Interactive feature badges with icons
+ * - Fully responsive layout
+ * 
+ * @design
+ * - Uses gaming color palette (neon-green, electric, cyber-pink)
+ * - JetBrains Mono font for technical aesthetic
+ * - Glass-morphism effects on feature badges
+ * - Hover animations and transitions
+ */
 const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
     <header className="relative overflow-hidden border-b-2 border-neon-green-500/30">

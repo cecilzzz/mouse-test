@@ -7,8 +7,55 @@ import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
 import type { MouseButtonState, ClickCount, MouseEventHandler } from '@/types'
 
+/**
+ * Props for the MouseButtonTest component
+ */
 interface MouseButtonTestProps {}
 
+/**
+ * MouseButtonTest Component
+ * 
+ * Interactive mouse button testing tool that detects and visualizes mouse button clicks.
+ * Displays a visual mouse diagram where users can test all mouse buttons including
+ * left, right, middle, back, and forward buttons.
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <MouseButtonTest />
+ * ```
+ * 
+ * @returns {JSX.Element} Interactive mouse testing interface with click detection
+ * 
+ * @features
+ * - Real-time mouse button detection for all 5 standard buttons
+ * - Visual feedback with color changes when buttons are pressed
+ * - Click counter for each button to track usage
+ * - Reset functionality to clear all counters
+ * - Responsive design that works on all devices
+ * 
+ * @functionality
+ * - Detects mouse down/up events for visual feedback
+ * - Prevents context menu on right-click for better UX
+ * - Tracks total clicks per button
+ * - Provides immediate visual confirmation of button presses
+ * 
+ * @state
+ * - buttonStates: MouseButtonState - Tracks which buttons are currently pressed
+ * - clickCounts: ClickCount - Stores total click count for each button
+ * 
+ * @design
+ * - Cyberpunk/gaming aesthetic with neon colors
+ * - SVG-based mouse diagram for scalability
+ * - Animated button highlights when pressed
+ * - Gaming-style UI elements and typography
+ * - Glassmorphism effects and gradients
+ * 
+ * @accessibility
+ * - Keyboard navigation support
+ * - Clear visual indicators for button states
+ * - Descriptive button labels and instructions
+ */
 const MouseButtonTest: React.FC<MouseButtonTestProps> = () => {
   const [buttonStates, setButtonStates] = useState<MouseButtonState>({
     left: false,
