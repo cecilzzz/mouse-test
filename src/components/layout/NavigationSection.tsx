@@ -1,7 +1,10 @@
 import { Zap, Target, Mouse, Settings } from 'lucide-react'
+import type { TestTool } from '@/types'
 
-const NavigationSection = () => {
-  const testTools = [
+interface NavigationSectionProps {}
+
+const NavigationSection: React.FC<NavigationSectionProps> = () => {
+  const testTools: TestTool[] = [
     {
       href: '/cps',
       icon: Zap,

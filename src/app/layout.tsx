@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ThemeToggle from '@/components/ThemeToggle';
 
 export const metadata: Metadata = {
   title: "Mouse Test - Complete Mouse Testing Tools Online | CPS Test, DPI Test, Button Test",
@@ -48,7 +47,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeToggle />
         {children}
       </body>
     </html>

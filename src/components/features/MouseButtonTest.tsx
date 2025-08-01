@@ -1,28 +1,15 @@
 'use client'
 
 import React, { useState, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
+import type { MouseButtonState, ClickCount, MouseEventHandler } from '@/types'
 
-interface MouseButtonState {
-  left: boolean
-  right: boolean
-  middle: boolean
-  back: boolean
-  forward: boolean
-}
+interface MouseButtonTestProps {}
 
-interface ClickCount {
-  left: number
-  right: number
-  middle: number
-  back: number
-  forward: number
-}
-
-const MouseButtonTest = () => {
+const MouseButtonTest: React.FC<MouseButtonTestProps> = () => {
   const [buttonStates, setButtonStates] = useState<MouseButtonState>({
     left: false,
     right: false,

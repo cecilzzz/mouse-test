@@ -1,6 +1,8 @@
 import { Mouse, Zap, Target, Settings, Terminal } from 'lucide-react'
 
-const HeroSection = () => {
+interface HeroSectionProps {}
+
+const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
     <header className="relative overflow-hidden border-b-2 border-neon-green-500/30">
       {/* Background Layers */}

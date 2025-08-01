@@ -1,9 +1,12 @@
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/Card'
 import { HelpCircle } from 'lucide-react'
+import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
 
-const MouseTestFAQ = () => {
-  const faqs = [
+interface MouseTestFaqProps {}
+
+const MouseTestFaq: React.FC<MouseTestFaqProps> = () => {
+  const faqs: FaqItem[] = [
     {
       question: "What is a Mouse Test?",
       answer: "A mouse test is a comprehensive evaluation tool that checks various aspects of your computer mouse functionality, including button responsiveness, click speed (CPS), DPI accuracy, and overall performance. It helps identify hardware issues and optimize your mouse settings for better productivity or gaming.",
@@ -31,7 +34,7 @@ const MouseTestFAQ = () => {
     },
     {
       question: "How to Test Mouse Accuracy?",
-      answer: "Mouse accuracy testing involves checking cursor precision, tracking consistency, and sensor performance. Our accuracy test evaluates how well your mouse tracks movement, detects lifting, and maintains precision across different speeds and surfaces.",
+      answer: "Mouse accuracy testing evaluates precision and tracking performance across different surfaces and movement speeds. Our accuracy test measures cursor positioning consistency, tracking stability, and helps identify issues like jittering, skipping, or drift that can affect productivity and gaming performance.",
       category: "accuracy"
     },
     {
@@ -56,8 +59,8 @@ const MouseTestFAQ = () => {
     }
   ]
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
+  const getCategoryColor = (category: FaqCategory): string => {
+    const colors: CategoryColors = {
       basic: 'from-neon-green-500 to-electric-500',
       cps: 'from-electric-500 to-cyber-pink-500',
       dpi: 'from-cyber-pink-500 to-warning-orange-500',
@@ -65,9 +68,12 @@ const MouseTestFAQ = () => {
       performance: 'from-hacker-purple-500 to-neon-green-500',
       accuracy: 'from-neon-green-500 to-electric-500',
       scroll: 'from-electric-500 to-cyber-pink-500',
-      troubleshooting: 'from-cyber-pink-500 to-warning-orange-500'
+      troubleshooting: 'from-cyber-pink-500 to-warning-orange-500',
+      compatibility: 'from-hacker-purple-500 to-neon-green-500',
+      gaming: 'from-warning-orange-500 to-electric-500'
     }
-    return colors[category as keyof typeof colors] || colors.basic
+    
+    return colors[category] || colors.basic
   }
 
   return (
@@ -78,66 +84,50 @@ const MouseTestFAQ = () => {
             <HelpCircle className="w-8 h-8 text-black" />
           </div>
         </div>
-        <h2 className="text-4xl font-black mb-4">
-          <span className="hero-gradient">GAMING FAQ</span>
+        <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-neon-green-400 via-electric-400 to-cyber-pink-400 bg-clip-text text-transparent mb-4 font-mono">
+          MOUSE TEST FAQ
         </h2>
-        <p className="text-lg font-mono max-w-4xl mx-auto leading-relaxed text-electric-400">
-          {'>> COMPLETE MOUSE TESTING KNOWLEDGE BASE <<'}
-        </p>
-        <p className="text-muted-foreground font-mono mt-2">
-          CPS | DPI | BUTTON TESTING | PERFORMANCE | DIAGNOSTICS
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto font-mono">
+          COMMON QUESTIONS & EXPERT ANSWERS ABOUT MOUSE TESTING
         </p>
       </div>
-      
-      <div className="grid gap-6 lg:grid-cols-2">
+
+      <div className="grid gap-6 md:grid-cols-2">
         {faqs.map((faq, index) => (
-          <Card key={index} className="test-card group hover:scale-[1.02] transition-all duration-300 bg-black/90 border-2 hover:shadow-lg hover:shadow-primary/20">
-            <CardHeader className="pb-4">
+          <Card 
+            key={index} 
+            className="group bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700/50 hover:border-neon-green-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-neon-green-500/20"
+          >
+            <CardHeader className="pb-3">
               <div className="flex items-start gap-3">
-                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${getCategoryColor(faq.category)} flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300 border-2 border-current`}>
-                  <HelpCircle className="w-5 h-5 text-black" />
+                <div className={`w-8 h-8 rounded-md bg-gradient-to-r ${getCategoryColor(faq.category)} flex items-center justify-center flex-shrink-0 mt-1`}>
+                  <span className="text-xs font-bold text-black font-mono">
+                    {index + 1}
+                  </span>
                 </div>
-                <h2 className="text-lg leading-tight group-hover:text-primary transition-colors duration-300 font-mono font-bold text-electric-400 group-hover:text-neon-green-400">
-                  {faq.question}
-                </h2>
+                <div className="flex-1">
+                  <h2 className="text-lg font-bold text-neon-green-400 group-hover:text-electric-400 transition-colors font-mono leading-tight">
+                    {faq.question}
+                  </h2>
+                </div>
               </div>
             </CardHeader>
-            <CardContent>
-              <CardDescription className="text-sm leading-relaxed text-muted-foreground">
+            <CardContent className="pt-0">
+              <p className="text-gray-300 leading-relaxed text-sm">
                 {faq.answer}
-              </CardDescription>
+              </p>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Call to Action */}
-      <div className="mt-16 text-center">
-        <div className="glass-effect rounded-xl p-8 max-w-3xl mx-auto border-2 border-neon-green-500/30">
-          <h3 className="text-2xl font-black mb-4 font-mono text-electric-400">
-            {'>> READY TO TEST YOUR GAMING MOUSE? <<'}
-          </h3>
-          <p className="text-muted-foreground mb-6 font-mono">
-            GET INSTANT PROFESSIONAL RESULTS | NO DOWNLOADS | ZERO INSTALLATION
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a 
-              href="#" 
-              className="px-8 py-4 bg-gradient-to-r from-neon-green-500 to-electric-500 text-black rounded-lg font-mono font-black hover:shadow-lg hover:shadow-neon-green-500/50 hover:scale-105 transition-all duration-300 border-2 border-neon-green-400"
-            >
-              START TESTING NOW
-            </a>
-            <a 
-              href="/cps" 
-              className="px-8 py-4 border-2 border-electric-500 rounded-lg font-mono font-bold text-electric-400 hover:bg-electric-500 hover:text-black transition-all duration-300"
-            >
-              CPS TEST {'>'}
-            </a>
-          </div>
-        </div>
+      <div className="mt-12 text-center">
+        <p className="text-gray-400 font-mono text-sm">
+          💡 NEED MORE HELP? CHECK OUR TESTING TOOLS ABOVE
+        </p>
       </div>
     </section>
   )
 }
 
-export default MouseTestFAQ
+export default MouseTestFaq
