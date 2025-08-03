@@ -2,11 +2,6 @@ import { Zap, Target, Mouse, Settings } from 'lucide-react'
 import type { TestTool } from '@/types'
 
 /**
- * Props for the NavigationSection component
- */
-interface NavigationSectionProps {}
-
-/**
  * NavigationSection Component
  * 
  * Renders a grid of navigation cards for different mouse testing tools.
@@ -44,7 +39,7 @@ interface NavigationSectionProps {}
  * - iconColor: Icon color classes
  * - titleColor: Title text color classes
  */
-const NavigationSection: React.FC<NavigationSectionProps> = () => {
+const NavigationSection: React.FC = () => {
   const testTools: TestTool[] = [
     {
       href: '/cps',

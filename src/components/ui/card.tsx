@@ -3,16 +3,16 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Card Component Props Interfaces
+ * Card Component Props Types
  * 
  * Type-safe props for all Card-related components extending standard HTML attributes.
  */
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
-export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
-export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
-export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
-export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type CardProps = React.HTMLAttributes<HTMLDivElement>
+export type CardHeaderProps = React.HTMLAttributes<HTMLDivElement>
+export type CardTitleProps = React.HTMLAttributes<HTMLHeadingElement>
+export type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>
+export type CardContentProps = React.HTMLAttributes<HTMLDivElement>
+export type CardFooterProps = React.HTMLAttributes<HTMLDivElement>
 
 /**
  * Card Component

@@ -10,7 +10,7 @@
  * @author Mouse Test Team
  */
 
-import type { Nullable, Optional, TestResult, CpsTestResult, DpiTestResult } from '@/types'
+import type { TestResult, CpsTestResult, DpiTestResult } from '@/types'
 
 // ============================================================================
 // TYPE GUARD FUNCTIONS
@@ -123,7 +123,7 @@ export function isDpiTestResult(result: TestResult): result is TestResult & { de
  * 
  * @template T - Expected return type
  * @param {string} json - JSON string to parse
- * @returns {Optional<T>} Parsed object or undefined if parsing fails
+ * @returns {T | undefined} Parsed object or undefined if parsing fails
  * 
  * @example
  * ```typescript
@@ -137,7 +137,7 @@ export function isDpiTestResult(result: TestResult): result is TestResult & { de
  * }
  * ```
  */
-export function safeJsonParse<T>(json: string): Optional<T> {
+export function safeJsonParse<T>(json: string): T | undefined {
   try {
     return JSON.parse(json) as T
   } catch {
@@ -156,7 +156,7 @@ export function safeJsonParse<T>(json: string): Optional<T> {
  * Handles cases where localStorage is unavailable (SSR, private browsing).
  * 
  * @param {string} key - The localStorage key to retrieve
- * @returns {Optional<string>} The stored value or undefined
+ * @returns {string | undefined} The stored value or undefined
  * 
  * @example
  * ```typescript
@@ -166,7 +166,7 @@ export function safeJsonParse<T>(json: string): Optional<T> {
  * }
  * ```
  */
-export function getLocalStorageItem(key: string): Optional<string> {
+export function getLocalStorageItem(key: string): string | undefined {
   if (typeof window === 'undefined') return undefined
   
   try {
@@ -330,12 +330,12 @@ export function delay(ms: number): Promise<void> {
  * });
  * ```
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     if (!inThrottle) {
       func.apply(this, args)
       inThrottle = true
@@ -366,12 +366,12 @@ export function throttle<T extends (...args: any[]) => any>(
  * });
  * ```
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | undefined
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     clearTimeout(timeout)
     timeout = setTimeout(() => func.apply(this, args), wait)
   }

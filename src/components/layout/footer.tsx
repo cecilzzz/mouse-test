@@ -1,9 +1,4 @@
 /**
- * Props for the Footer component
- */
-interface FooterProps {}
-
-/**
  * Footer Component
  * 
  * Displays the website footer with copyright information and feature highlights.
@@ -30,7 +25,7 @@ interface FooterProps {}
  * - Electric blue accent colors
  * - Proper spacing and padding
  */
-const Footer: React.FC<FooterProps> = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="border-t-2 border-neon-green-500/30 bg-black/90">
       <div className="container mx-auto px-4 py-8">

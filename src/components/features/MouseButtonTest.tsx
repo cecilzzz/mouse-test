@@ -5,12 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
-import type { MouseButtonState, ClickCount, MouseEventHandler } from '@/types'
-
-/**
- * Props for the MouseButtonTest component
- */
-interface MouseButtonTestProps {}
+import type { MouseButtonState, ClickCount } from '@/types'
 
 /**
  * MouseButtonTest Component
@@ -56,7 +51,7 @@ interface MouseButtonTestProps {}
  * - Clear visual indicators for button states
  * - Descriptive button labels and instructions
  */
-const MouseButtonTest: React.FC<MouseButtonTestProps> = () => {
+const MouseButtonTest: React.FC = () => {
   const [buttonStates, setButtonStates] = useState<MouseButtonState>({
     left: false,
     right: false,

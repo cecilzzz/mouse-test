@@ -1,12 +1,7 @@
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/Card'
+import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { HelpCircle } from 'lucide-react'
 import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
-
-/**
- * Props for the MouseTestFaq component
- */
-interface MouseTestFaqProps {}
 
 /**
  * MouseTestFaq Component
@@ -58,7 +53,7 @@ interface MouseTestFaqProps {}
  * - Structured data markup for rich snippets
  * - Category-based organization aids discoverability
  */
-const MouseTestFaq: React.FC<MouseTestFaqProps> = () => {
+const MouseTestFaq: React.FC = () => {
   const faqs: FaqItem[] = [
     {
       question: "What is a Mouse Test?",
