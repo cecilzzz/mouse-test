@@ -157,10 +157,76 @@
     animation: rgb-cycle 3s linear infinite;
   }
   
+  .click-area {
+    @apply transition-all duration-300 ease-out;
+    @apply select-none cursor-pointer;
+  }
+  
+  .click-area.active {
+    @apply shadow-2xl;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 65, 0.5),
+      0 0 60px rgba(0, 255, 65, 0.3),
+      inset 0 0 30px rgba(0, 255, 65, 0.1);
+    animation: click-pulse 0.5s ease-out infinite alternate;
+  }
+  
+  .click-area.countdown {
+    animation: countdown-pulse 1s ease-in-out infinite;
+  }
+  
+  .click-area:hover {
+    @apply transform scale-105;
+    filter: brightness(1.1);
+  }
+  
+  .click-area:active {
+    @apply transform scale-95;
+    filter: brightness(1.3);
+  }
+  
   @keyframes rgb-cycle {
     0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
     33% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
     66% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
     100% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+  }
+  
+  @keyframes click-pulse {
+    0% { 
+      box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.5),
+        0 0 60px rgba(0, 255, 65, 0.3);
+    }
+    100% { 
+      box-shadow: 
+        0 0 50px rgba(0, 255, 65, 0.8),
+        0 0 100px rgba(0, 255, 65, 0.5);
+    }
+  }
+  
+  @keyframes countdown-pulse {
+    0% { 
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+    }
+    50% { 
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 102, 0, 0.8);
+    }
+    100% { 
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+    }
+  }
+  
+  @keyframes click-feedback {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-click-feedback {
+    animation: click-feedback 0.15s ease-out;
   }
 }

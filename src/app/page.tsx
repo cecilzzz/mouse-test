@@ -1,6 +1,6 @@
 import HeroSection from '@/components/layout/HeroSection'
 import NavigationSection from '@/components/layout/NavigationSection'
-import Footer from '@/components/layout/Footer'
+import Footer from '@/components/layout/footer'
 import MouseButtonTest from '@/components/features/MouseButtonTest'
 import MouseTestFaq from '@/components/features/MouseTestFaq'
 
