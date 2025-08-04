@@ -1,10 +1,12 @@
 'use client'
 
-import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Timer, Zap, Play } from 'lucide-react'
+import { useCpsTimer } from '@/hooks/useCpsTimer'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 import type { CpsTestResult } from '@/types'
 
 interface CpsTestProps {
@@ -14,147 +16,62 @@ interface CpsTestProps {
   description?: string
 }
 
-type TestState = 'idle' | 'ready' | 'running' | 'finished'
-
-const CpsTest: React.FC<CpsTestProps> = ({ 
+const CpsTestSimplified: React.FC<CpsTestProps> = ({ 
   duration, 
   testType = 'left',
   title,
   description 
 }) => {
-  const [testState, setTestState] = useState<TestState>('idle')
-  const [clickCount, setClickCount] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(duration)
-  const [cps, setCps] = useState(0)
-  const [bestScore, setBestScore] = useState<number>(0)
-  const [isCountdown, setIsCountdown] = useState(false)
-  const [countdownValue, setCountdownValue] = useState(3)
-  const [error, setError] = useState<string | null>(null)
-  
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const countdownRef = useRef<NodeJS.Timeout | null>(null)
-  const testStartTimeRef = useRef<number>(0)
-  const clickTimestampsRef = useRef<number[]>([])
+  const [bestScore, setBestScore] = useLocalStorage(`cps-best-${duration}s-${testType}`, 0)
+  const [, setTestHistory] = useLocalStorage<CpsTestResult[]>('cps-test-history', [])
 
-  // Safe localStorage access
-  const safeLocalStorage = useMemo(() => ({
-    getItem: (key: string): string | null => {
-      try {
-        return localStorage.getItem(key)
-      } catch (error) {
-        console.warn('localStorage not available:', error)
-        return null
-      }
-    },
-    setItem: (key: string, value: string): void => {
-      try {
-        localStorage.setItem(key, value)
-      } catch (error) {
-        console.warn('localStorage not available:', error)
-      }
-    }
-  }), [])
-
-  // Load best score from localStorage
-  useEffect(() => {
-    try {
-      const savedScore = safeLocalStorage.getItem(`cps-best-${duration}s-${testType}`)
-      if (savedScore) {
-        setBestScore(parseFloat(savedScore))
-      }
-    } catch (error) {
-      console.warn('Failed to load best score:', error)
-      setError('Failed to load previous scores')
-    }
-  }, [duration, testType, safeLocalStorage])
-
-  const resetTest = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
-    if (countdownRef.current) clearInterval(countdownRef.current)
-    
-    setTestState('idle')
-    setClickCount(0)
-    setTimeLeft(duration)
-    setCps(0)
-    setIsCountdown(false)
-    setCountdownValue(3)
-    clickTimestampsRef.current = []
-  }, [duration])
-
-  const startCountdown = useCallback(() => {
-    setIsCountdown(true)
-    setCountdownValue(3)
-    
-    countdownRef.current = setInterval(() => {
-      setCountdownValue(prev => {
-        if (prev <= 1) {
-          setIsCountdown(false)
-          setTestState('running')
-          testStartTimeRef.current = Date.now()
-          
-          // Start the main timer
-          intervalRef.current = setInterval(() => {
-            setTimeLeft(prevTime => {
-              if (prevTime <= 0.1) {
-                setTestState('finished')
-                if (intervalRef.current) clearInterval(intervalRef.current)
-                return 0
-              }
-              return prevTime - 0.1
-            })
-          }, 100)
-          
-          if (countdownRef.current) clearInterval(countdownRef.current)
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-  }, [])
-
-  const handleClick = useCallback((event: React.MouseEvent) => {
-    event.preventDefault()
-    
-    if (testState === 'idle') {
-      setTestState('ready')
-      startCountdown()
-      return
+  const handleTestComplete = useCallback((clickCount: number, finalCps: number) => {
+    // Save best score
+    if (finalCps > bestScore) {
+      setBestScore(finalCps)
     }
     
-    if (testState !== 'running') return
-
-    const now = Date.now()
-    clickTimestampsRef.current.push(now)
+    // Save test result
+    const result: CpsTestResult = {
+      clicksPerSecond: finalCps,
+      totalClicks: clickCount,
+      testDuration: duration,
+      timestamp: new Date()
+    }
     
-    setClickCount(prev => {
-      const newCount = prev + 1
-      const elapsed = (now - testStartTimeRef.current) / 1000
-      const currentCps = elapsed > 0 ? newCount / elapsed : 0
-      setCps(currentCps)
-      return newCount
-    })
-  }, [testState, startCountdown])
+    setTestHistory(prev => [...prev, result].slice(-50)) // Keep last 50 results
+  }, [bestScore, setBestScore, setTestHistory, duration])
+
+  const {
+    testState,
+    clickCount,
+    timeLeft,
+    cps,
+    isCountdown,
+    countdownValue,
+    handleClick,
+    resetTest,
+    startTest
+  } = useCpsTimer({ duration, onTestComplete: handleTestComplete })
 
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
     if (testType === 'spacebar' && event.code === 'Space') {
       event.preventDefault()
-      const mockEvent = { preventDefault: () => {} } as React.MouseEvent
-      handleClick(mockEvent)
+      handleClick()
     }
   }, [testType, handleClick])
 
   const handleContextMenu = useCallback((event: React.MouseEvent) => {
     if (testType === 'right') {
       event.preventDefault()
-      handleClick(event)
+      handleClick()
     }
   }, [testType, handleClick])
 
   const handleTouchStart = useCallback((event: React.TouchEvent) => {
     if (testType === 'mobile') {
       event.preventDefault()
-      const mockEvent = { preventDefault: () => {} } as React.MouseEvent
-      handleClick(mockEvent)
+      handleClick()
     }
   }, [testType, handleClick])
 
@@ -165,38 +82,6 @@ const CpsTest: React.FC<CpsTestProps> = ({
       return () => document.removeEventListener('keydown', handleKeyDown)
     }
   }, [testType, handleKeyDown])
-
-  // Calculate final results
-  useEffect(() => {
-    if (testState === 'finished') {
-      try {
-        const finalCps = clickCount / duration
-        setCps(finalCps)
-        
-        // Save best score
-        if (finalCps > bestScore) {
-          setBestScore(finalCps)
-          safeLocalStorage.setItem(`cps-best-${duration}s-${testType}`, finalCps.toString())
-        }
-        
-        // Save test result
-        const result: CpsTestResult = {
-          clicksPerSecond: finalCps,
-          totalClicks: clickCount,
-          testDuration: duration,
-          timestamp: new Date()
-        }
-        
-        const existingResultsStr = safeLocalStorage.getItem('cps-test-history') || '[]'
-        const existingResults = JSON.parse(existingResultsStr)
-        existingResults.push(result)
-        safeLocalStorage.setItem('cps-test-history', JSON.stringify(existingResults.slice(-50))) // Keep last 50 results
-      } catch (error) {
-        console.warn('Failed to save test results:', error)
-        setError('Failed to save results')
-      }
-    }
-  }, [testState, clickCount, duration, bestScore, testType, safeLocalStorage])
 
   const getClickAreaProps = () => {
     const baseProps = {
@@ -350,10 +235,7 @@ const CpsTest: React.FC<CpsTestProps> = ({
                   <Button 
                     onClick={() => {
                       resetTest()
-                      setTimeout(() => {
-                        setTestState('ready')
-                        startCountdown()
-                      }, 100)
+                      setTimeout(startTest, 100)
                     }}
                     className="cyber-button gap-2"
                     size="lg"
@@ -390,20 +272,6 @@ const CpsTest: React.FC<CpsTestProps> = ({
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {error && (
-                <div className="p-3 bg-rgb-red/20 border border-rgb-red/50 rounded-lg">
-                  <p className="text-sm text-rgb-red font-mono">⚠️ {error}</p>
-                  <Button 
-                    onClick={() => setError(null)} 
-                    variant="outline" 
-                    size="sm"
-                    className="mt-2 text-xs"
-                  >
-                    Dismiss
-                  </Button>
-                </div>
-              )}
-              
               <div className="text-center">
                 <div className="cps-counter mb-2">{testState === 'finished' ? cps.toFixed(2) : cps.toFixed(1)}</div>
                 <p className="text-sm text-muted-foreground font-mono">CURRENT CPS</p>
@@ -456,4 +324,4 @@ const CpsTest: React.FC<CpsTestProps> = ({
   )
 }
 
-export default CpsTest
+export default CpsTestSimplified

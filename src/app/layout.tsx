@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ErrorBoundary from "@/components/shared/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Mouse Test - Complete Mouse Testing Tools Online | CPS Test, DPI Test, Button Test",
@@ -47,7 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   );

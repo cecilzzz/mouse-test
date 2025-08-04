@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import Footer from '@/components/layout/footer'
+import Footer from '@/components/layout/Footer'
 import CpsTest from '@/components/features/cps/CpsTest'
 
 export const metadata: Metadata = {

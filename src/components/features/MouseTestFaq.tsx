@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { HelpCircle } from 'lucide-react'
 import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
 
