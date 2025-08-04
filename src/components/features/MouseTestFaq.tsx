@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { HelpCircle } from 'lucide-react'
+import FaqSchema from '@/components/seo/FaqSchema'
 import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
 
 /**
@@ -56,54 +57,64 @@ import type { FaqItem, FaqCategory, CategoryColors } from '@/types'
 const MouseTestFaq: React.FC = () => {
   const faqs: FaqItem[] = [
     {
-      question: "What is a Mouse Test?",
-      answer: "A mouse test is a comprehensive evaluation tool that checks various aspects of your computer mouse functionality, including button responsiveness, click speed (CPS), DPI accuracy, and overall performance. It helps identify hardware issues and optimize your mouse settings for better productivity or gaming.",
+      question: "What is a Mouse Test and Why Do You Need It?",
+      answer: "A mouse test is a comprehensive diagnostic tool that evaluates your computer mouse's hardware functionality, performance metrics, and responsiveness. Our free online <strong>mouse test</strong> checks button responsiveness, <strong>click speed (CPS)</strong>, DPI accuracy, polling rate, scroll wheel functionality, and tracking precision. Regular mouse testing helps identify hardware issues early, optimize settings for gaming or productivity, and ensure your mouse performs at peak efficiency. Whether you're a professional gamer, designer, or everyday computer user, mouse testing is essential for maintaining optimal computer interaction.",
       category: "basic"
     },
     {
-      question: "How to Test Mouse Buttons?",
-      answer: "To test mouse buttons, simply click on the visual mouse diagram above. Each button (left, right, middle, back, forward) will light up green when pressed and display a click counter. This helps verify that all buttons are working correctly and responding to your inputs.",
+      question: "How to Test Mouse Buttons - Complete Guide",
+      answer: "Testing <strong>mouse buttons</strong> is simple with our interactive mouse diagram above. Click each button (left, right, middle, back, forward) to verify functionality. The test detects button press registration, release timing, and click consistency. For thorough testing: 1) Test all buttons individually, 2) Check for stuck or unresponsive buttons, 3) Verify middle-click and side button functionality, 4) Test rapid clicking to detect hardware lag. Our <strong>mouse button test</strong> works with all mouse types including gaming mice, wireless mice, and trackpads. Common issues detected include <strong>double-click problems</strong>, button ghosting, and mechanical switch failures.",
       category: "button"
     },
     {
-      question: "What is CPS Test?",
-      answer: "CPS (Clicks Per Second) test measures how fast you can click your mouse button in a given time period. It's commonly used by gamers to improve their clicking speed for competitive gaming, especially in games like Minecraft PvP, osu!, and other click-intensive games.",
+      question: "CPS Test - How Fast Can You Click?",
+      answer: "<strong>CPS (Clicks Per Second) test</strong> measures your clicking speed and mouse responsiveness for gaming and productivity. Average CPS ranges: Casual users (2-4 CPS), Regular gamers (4-7 CPS), Pro gamers (8-12+ CPS). Our <strong>CPS test</strong> supports multiple time intervals (1s, 5s, 10s, 30s, 60s) for accurate measurement. Popular among Minecraft PvP players, osu! gamers, and competitive esports athletes. Tips to improve CPS: Use proper finger positioning, practice <strong>butterfly clicking</strong>, optimize mouse settings, and maintain consistent rhythm. Test different clicking techniques like jitter clicking, butterfly clicking, and drag clicking to find your optimal method.",
       category: "cps"
     },
     {
-      question: "How to Check Mouse DPI?",
-      answer: "Mouse DPI (Dots Per Inch) determines cursor sensitivity and movement precision. You can check your mouse DPI using our DPI test tool, which measures how far your cursor moves on screen relative to physical mouse movement. Higher DPI means faster cursor movement.",
+      question: "How to Check Mouse DPI and Sensitivity Settings",
+      answer: "<strong>Mouse DPI (Dots Per Inch)</strong> determines cursor sensitivity and movement precision across your screen. Common DPI ranges: Office work (800-1200 DPI), Gaming (1600-3200 DPI), Design work (3200+ DPI). Our <strong>DPI test</strong> measures actual DPI by tracking cursor movement relative to physical mouse movement. To optimize DPI: 1) Start with manufacturer specifications, 2) Test different DPI settings, 3) Adjust in-game sensitivity accordingly, 4) Consider your monitor resolution and desk space. High DPI isn't always better - find the sweet spot for your usage. <strong>Gaming mice</strong> often feature adjustable DPI with dedicated buttons for real-time switching.",
       category: "dpi"
     },
     {
-      question: "What is Mouse Hz Test?",
-      answer: "Mouse Hz (Hertz) test, also known as polling rate test, measures how often your mouse reports its position to your computer per second. Common polling rates are 125Hz, 500Hz, and 1000Hz. Higher Hz rates provide smoother cursor movement and better responsiveness.",
+      question: "Mouse Polling Rate (Hz) Test - Performance Optimization",
+      answer: "<strong>Mouse polling rate (Hz)</strong> measures how frequently your mouse reports position data to your computer. Standard rates: 125Hz (8ms delay), 500Hz (2ms delay), 1000Hz (1ms delay). Higher polling rates provide smoother cursor movement and reduced input lag, crucial for <strong>competitive gaming</strong> and precision work. Our <strong>Hz test</strong> accurately measures your mouse's actual polling rate versus advertised specifications. Gaming mice typically support 1000Hz, while basic mice often operate at 125Hz. Note: Higher polling rates consume more CPU resources and may cause issues with older systems. Most modern gaming requires at least 500Hz for optimal performance.",
       category: "performance"
     },
     {
-      question: "How to Test Mouse Accuracy?",
-      answer: "Mouse accuracy testing evaluates precision and tracking performance across different surfaces and movement speeds. Our accuracy test measures cursor positioning consistency, tracking stability, and helps identify issues like jittering, skipping, or drift that can affect productivity and gaming performance.",
+      question: "Mouse Accuracy Test - Precision and Tracking Performance",
+      answer: "<strong>Mouse accuracy testing</strong> evaluates tracking precision, sensor performance, and movement consistency across different surfaces and speeds. Our <strong>accuracy test</strong> measures: pointer precision, tracking stability at various speeds, acceleration handling, and surface compatibility. Factors affecting accuracy: mouse pad quality, sensor type (optical vs laser), <strong>DPI settings</strong>, and surface texture. Gaming and design work require high accuracy for precise movements. Common accuracy issues include: cursor drift, tracking skips, acceleration inconsistency, and angle snapping. Optical sensors generally provide better accuracy than laser sensors for gaming applications.",
       category: "accuracy"
     },
     {
-      question: "What is Double Click Test?",
-      answer: "Double click test verifies that your mouse can register two quick consecutive clicks as a double-click action. This is important for file operations, text selection, and general computer usage. Issues with double-clicking can indicate hardware wear or incorrect timing settings.",
+      question: "Double Click Test - Diagnosing Click Issues",
+      answer: "<strong>Double click test</strong> verifies your mouse's ability to register rapid consecutive clicks as intended actions. This test is crucial for detecting <strong>double-click malfunctions</strong>, where single clicks register as double clicks or double clicks fail to register. Common in aging mice where mechanical switches wear out, causing erratic behavior. Our test measures click timing accuracy and consistency. Troubleshooting double-click issues: 1) Adjust double-click speed in system settings, 2) Clean mouse switches, 3) Update mouse drivers, 4) Consider hardware replacement if problems persist. <strong>Gaming mice</strong> with high-quality switches (Omron, Huano) typically have longer lifespans.",
       category: "button"
     },
     {
-      question: "How to Test Mouse Scroll Wheel?",
-      answer: "Mouse scroll wheel testing checks if your scroll wheel responds correctly to both vertical scrolling and middle-click functionality. Our scroll test detects wheel movement direction, click responsiveness, and smooth scrolling performance.",
+      question: "Scroll Wheel Test - Functionality and Responsiveness",
+      answer: "<strong>Scroll wheel testing</strong> verifies vertical scrolling, horizontal scrolling (if supported), and middle-click functionality. Our <strong>scroll test</strong> detects scroll direction accuracy, wheel resistance, smooth scrolling performance, and middle-button click registration. Modern mice feature different scroll types: notched scrolling (tactile feedback), smooth scrolling (infinite scroll), and hybrid modes. Gaming mice often include scroll wheel customization for weapon switching and macro functions. Common scroll issues: wheel slipping, reverse scrolling, inconsistent scroll speed, and middle-click failure. Regular cleaning and proper maintenance extend scroll wheel lifespan.",
       category: "scroll"
     },
     {
       question: "Why Use Online Mouse Testing Tools?",
-      answer: "Online mouse testing tools provide immediate, comprehensive diagnostics without requiring software installation. They offer standardized testing environments, detailed results, and help troubleshoot mouse issues quickly. Perfect for gamers, professionals, and anyone experiencing mouse problems.",
+      answer: "<strong>Online mouse testing tools</strong> offer immediate, comprehensive diagnostics without software installation, driver updates, or system modifications. Benefits include: cross-platform compatibility, real-time results, standardized testing environment, and free accessibility. Our web-based tests work on Windows, Mac, Linux, and mobile devices. Perfect for: <strong>troubleshooting mouse issues</strong>, pre-purchase testing in stores, gaming optimization, productivity enhancement, and hardware diagnostics. Online tools provide objective measurements unaffected by system-specific settings or driver issues. Ideal for quick testing before important gaming sessions or work presentations.",
       category: "basic"
     },
     {
-      question: "What Mouse Problems Can Be Detected?",
-      answer: "Common mouse issues that can be detected include: unresponsive buttons, erratic cursor movement, scroll wheel malfunctions, double-click failures, DPI inconsistencies, polling rate problems, and tracking accuracy issues. Early detection helps prevent productivity loss.",
+      question: "Common Mouse Problems and Solutions",
+      answer: "Mouse problems we can detect and help solve: 1) Unresponsive buttons - often caused by worn switches or driver issues, 2) Erratic cursor movement - usually surface or sensor problems, 3) Scroll wheel malfunctions - mechanical wear or debris buildup, 4) Double-click failures - timing issues or switch degradation, 5) DPI inconsistencies - sensor or software problems, 6) Low polling rate - USB port or driver issues, 7) Tracking accuracy problems - surface compatibility or sensor dust. Prevention tips: regular cleaning, proper mouse pad usage, driver updates, and avoiding liquid damage. Most issues can be resolved through software adjustments or basic maintenance.",
       category: "troubleshooting"
+    },
+    {
+      question: "Gaming Mouse Test - Optimize for Competitive Play",
+      answer: "Gaming mouse testing focuses on performance metrics critical for competitive gaming: ultra-low latency (sub-1ms click response), high polling rates (1000Hz+), precise tracking at high speeds, customizable DPI switching, and programmable button reliability. Our gaming-focused tests evaluate: click latency, tracking consistency during rapid movements, acceleration handling, and button durability. Popular gaming mouse features: adjustable weight systems, RGB lighting, on-the-fly DPI adjustment, and gaming-specific sensors (PMW3360, Hero, TrueMove). Essential for FPS games (CS:GO, Valorant), MOBA games (League of Legends, Dota 2), and competitive gaming where milliseconds matter.",
+      category: "gaming"
+    },
+    {
+      question: "Mouse Compatibility Test - Windows, Mac, Linux",
+      answer: "Mouse compatibility testing ensures your mouse works correctly across different operating systems and applications. Our tests verify: basic functionality on all major platforms, driver compatibility, advanced feature support (programmable buttons, DPI switching), and system-specific optimizations. Cross-platform considerations: Windows offers extensive gaming mouse support, Mac has different acceleration curves, Linux may require additional drivers for advanced features. Universal compatibility features: plug-and-play USB support, standard HID protocols, and basic button functionality. For optimal performance, use manufacturer-provided software for advanced features and customization.",
+      category: "compatibility"
     }
   ]
 
@@ -125,7 +136,9 @@ const MouseTestFaq: React.FC = () => {
   }
 
   return (
-    <section className="w-full max-w-6xl mx-auto">
+    <>
+      <FaqSchema faqs={faqs} />
+      <section className="w-full max-w-6xl mx-auto">
       <div className="text-center mb-12">
         <div className="flex items-center justify-center gap-3 mb-6">
           <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-neon-green-500 to-electric-500 flex items-center justify-center border-2 border-neon-green-400 shadow-lg shadow-neon-green-500/50">
@@ -133,10 +146,10 @@ const MouseTestFaq: React.FC = () => {
           </div>
         </div>
         <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-neon-green-400 via-electric-400 to-cyber-pink-400 bg-clip-text text-transparent mb-4 font-mono">
-          MOUSE TEST FAQ
+          Mouse Test FAQ - Expert Answers
         </h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto font-mono">
-          COMMON QUESTIONS & EXPERT ANSWERS ABOUT MOUSE TESTING
+          Get expert answers to common mouse testing questions. Learn about CPS tests, DPI settings, button diagnostics, and troubleshooting tips.
         </p>
       </div>
 
@@ -154,16 +167,16 @@ const MouseTestFaq: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-lg font-bold text-neon-green-400 group-hover:text-electric-400 transition-colors font-mono leading-tight">
+                  <h3 className="text-lg font-bold text-neon-green-400 group-hover:text-electric-400 transition-colors font-mono leading-tight">
                     {faq.question}
-                  </h2>
+                  </h3>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="pt-0">
-              <p className="text-gray-300 leading-relaxed text-sm">
-                {faq.answer}
-              </p>
+              <div className="text-gray-300 leading-relaxed text-sm">
+                <p dangerouslySetInnerHTML={{ __html: faq.answer }} />
+              </div>
             </CardContent>
           </Card>
         ))}
@@ -174,7 +187,8 @@ const MouseTestFaq: React.FC = () => {
           💡 NEED MORE HELP? CHECK OUR TESTING TOOLS ABOVE
         </p>
       </div>
-    </section>
+      </section>
+    </>
   )
 }
 

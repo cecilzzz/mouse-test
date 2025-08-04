@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Timer, Zap, Play } from 'lucide-react'
-import { useCpsTimer } from '@/hooks/useCpsTimer'
+import { useCpsTimer } from './hooks/useCpsTimer'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import type { CpsTestResult } from '@/types'
 
