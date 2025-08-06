@@ -5,6 +5,7 @@ import PageLayout from '@/components/layout/PageLayout'
 import ConfigurableHeroSection from '@/components/layout/ConfigurableHeroSection'
 import NavigationSection from '@/components/layout/NavigationSection'
 import MouseButtonTestCore from '@/components/features/mouse-button/MouseButtonTestCore'
+import type { MouseButtonStats } from '@/components/features/mouse-button/types'
 import TestStatsPanel from '@/components/shared/TestStatsPanel'
 import QuickActionsPanel from '@/components/shared/QuickActionsPanel'
 import PageFaq from '@/components/shared/PageFaq'
@@ -77,14 +78,14 @@ const homepageFaqs: FaqItem[] = [
 ]
 
 export default function Home() {
-  const [mouseStats, setMouseStats] = useState({
+  const [mouseStats, setMouseStats] = useState<MouseButtonStats>({
     totalClicks: 0,
     buttonCounts: { left: 0, right: 0, middle: 0, back: 0, forward: 0 },
     activeButtons: { left: false, right: false, middle: false, back: false, forward: false }
   })
   const [error, setError] = useState<string | null>(null)
 
-  const handleMouseStatsChange = useCallback((stats: typeof mouseStats) => {
+  const handleMouseStatsChange = useCallback((stats: MouseButtonStats) => {
     setMouseStats(stats)
   }, [])
 
