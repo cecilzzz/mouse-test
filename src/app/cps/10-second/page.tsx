@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import SimplePageLayout from '@/components/layout/SimplePageLayout'
 import CpsTestCore from '@/components/features/cps/CpsTestCore'
+import PageFaq from '@/components/shared/PageFaq'
+import { cps10SecondFaqs } from '@/components/features/cps/faq'
 
 export const metadata: Metadata = {
   title: "10 Second CPS Test - Extended Click Speed Test | Mouse Test",
@@ -152,6 +154,14 @@ export default function TenSecondCpsPage() {
               Right Click Test
             </a>
           </div>
+        </section>
+
+        <section className="mb-20">
+          <PageFaq 
+            faqs={cps10SecondFaqs}
+            title="10-Second CPS Test FAQ - Extended Performance Guide"
+            description="Master extended clicking performance with our comprehensive 10-second CPS test guide. Learn endurance strategies, gaming applications, and optimization techniques."
+          />
         </section>
     </SimplePageLayout>
   )

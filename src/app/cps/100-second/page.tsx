@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import SimplePageLayout from '@/components/layout/SimplePageLayout'
 import CpsTestCore from '@/components/features/cps/CpsTestCore'
+import PageFaq from '@/components/shared/PageFaq'
+import { cps100SecondFaqs } from '@/components/features/cps/faq'
 
 export const metadata: Metadata = {
   title: "100 Second CPS Test - Ultimate Endurance Challenge | Mouse Test",
@@ -190,6 +192,14 @@ export default function HundredSecondCpsPage() {
               Right Click Test
             </a>
           </div>
+        </section>
+
+        <section className="mb-20">
+          <PageFaq 
+            faqs={cps100SecondFaqs}
+            title="100-Second CPS Test FAQ - Ultimate Endurance Guide"
+            description="Master the ultimate clicking endurance challenge with our comprehensive 100-second CPS test guide. Learn stamina strategies, mental preparation, and safety tips."
+          />
         </section>
     </SimplePageLayout>
   )

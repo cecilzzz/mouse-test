@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Mouse Test
 
-## Getting Started
+A gaming-focused mouse testing web application built with **Next.js 14** and **cyberpunk aesthetic**.
 
-First, run the development server:
+## Features
+
+🖱️ **Comprehensive Mouse Testing**
+- CPS (Clicks Per Second) tests: 1s, 5s, 10s, 100s variants
+- Mouse button functionality testing
+- Gaming-specific tests: Jitter Click, Butterfly Click
+- Scroll wheel and double-click testing
+
+⚡ **Gaming Performance Focus**
+- Minecraft PvP optimization
+- Competitive gaming metrics
+- Real-time statistics and analytics
+- Performance history tracking
+
+🎨 **Cyberpunk Design**
+- Matrix green and neon aesthetics
+- RGB cycling animations
+- Terminal-style interface
+- Gaming hardware inspired UI
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Start development server
 pnpm dev
-# or
-bun dev
+
+# Build for production
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + Custom Cyberpunk Theme
+- **Components**: Radix UI + Custom Gaming Components
+- **Storage**: localStorage for test results
 
-## Learn More
+## Project Architecture
 
-To learn more about Next.js, take a look at the following resources:
+This project follows a **three-layer component architecture** with **feature-first colocation** for maximum maintainability and rapid development.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For detailed development guidelines, component architecture, and styling conventions, see [`CLAUDE.md`](./CLAUDE.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Target Audience
 
-## Deploy on Vercel
+- 🎯 Competitive gamers and esports players
+- 🖱️ Mouse hardware enthusiasts  
+- ⚡ Performance optimization seekers
+- 🎮 Gaming community members
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built for gamers who demand precision, performance, and that authentic hacker aesthetic.

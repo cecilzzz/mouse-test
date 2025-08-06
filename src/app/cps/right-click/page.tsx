@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import SimplePageLayout from '@/components/layout/SimplePageLayout'
 import CpsTestCore from '@/components/features/cps/CpsTestCore'
+import PageFaq from '@/components/shared/PageFaq'
+import { cpsRightClickFaqs } from '@/components/features/cps/faq'
 
 export const metadata: Metadata = {
   title: "Right Click CPS Test - Right Mouse Button Speed Test | Mouse Test",
@@ -191,6 +193,14 @@ export default function RightClickCpsPage() {
               Full Button Test
             </a>
           </div>
+        </section>
+
+        <section className="mb-20">
+          <PageFaq 
+            faqs={cpsRightClickFaqs}
+            title="Right Click CPS Test FAQ - Gaming Performance Guide"
+            description="Master right-click performance for gaming and productivity with our comprehensive right mouse button CPS guide. Learn techniques, applications, and optimization tips."
+          />
         </section>
     </SimplePageLayout>
   )

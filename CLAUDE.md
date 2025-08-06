@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Mouse Test is a gaming-focused mouse testing web application built with Next.js 14. It provides comprehensive mouse diagnostics including CPS (Clicks Per Second) testing, button functionality testing, DPI measurement, and performance analysis. The app targets gamers, competitive esports players, and tech enthusiasts with a cyberpunk/hacker aesthetic.
+Mouse Test is a gaming-focused mouse testing web application built with Next.js 14. It provides comprehensive mouse diagnostics including CPS (Clicks Per Second) testing, button functionality testing, and performance analysis. The app targets gamers, competitive esports players, and tech enthusiasts with a cyberpunk/hacker aesthetic.
 
 ## Development Commands
 
@@ -33,9 +33,9 @@ pnpm lint
 - No custom test scripts configured
 - No TypeScript check script configured
 
-## Architecture Overview
+## Tech Stack & Architecture
 
-### Tech Stack
+### Core Technologies
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript with strict mode
 - **Styling**: Tailwind CSS with custom cyberpunk/gaming theme
@@ -43,191 +43,226 @@ pnpm lint
 - **State Management**: React hooks (useState, useCallback, useRef)
 - **Storage**: localStorage for test results and best scores
 
-### Project Structure
+### Three-Layer Component Architecture
+
+The project follows a clean three-layer architecture for maximum maintainability and scalability:
+
+```
+Layout 層 (佈局組件) - 負責頁面結構和佈局
+├── PageLayout              # 基礎頁面佈局
+├── TestPageLayout          # 測試頁面專用佈局
+└── ConfigurableHeroSection # 可配置 Hero 區域
+
+Feature 層 (功能組件) - 負責核心測試邏輯
+├── cps/                    # CPS 測試核心邏輯
+├── mouse-button/           # 鼠標按鈕測試邏輯
+├── double-click/           # 雙擊測試邏輯
+├── scroll/                 # 滾輪測試邏輯
+└── gaming/                 # 游戲專用測試
+
+Shared 層 (共享組件) - 提供通用功能和UI元素
+├── TestStatsPanel          # 統一統計面板
+├── QuickActionsPanel       # 統一快速操作面板
+└── PageFaq                 # FAQ 組件
+```
+
+**Core Architecture Principles:**
+1. **職責分離**: Layout handles structure, Features handle logic, Shared provides common functionality
+2. **統一性**: All test pages use unified layouts and components
+3. **可擴展性**: Adding new test types takes only 3 minutes with standard templates
+4. **可重用性**: Components designed for multi-scenario reuse
+
+## Design System - Cyberpunk Gaming Aesthetic
+
+### Color Palette
+The app uses a **cyberpunk/gaming aesthetic** with these core colors:
+
+- **Neon Green** (`#00ff41`) - Matrix green, primary color
+- **Electric Blue** (`#00bfff`) - Tech blue, secondary color  
+- **Cyber Pink** (`#ff0080`) - Cyberpunk pink, accent color
+- **Warning Orange** (`#ff6600`) - Warning states
+- **Hacker Purple** (`#8a2be2`) - Special elements
+- **Deep Black** (`#000000`) - Background (6% brightness)
+
+### Visual Characteristics
+- **Typography**: ALL CAPS titles, JetBrains Mono monospace fonts
+- **Borders**: 2px solid borders with sharp corners (0.5rem radius)
+- **Effects**: Neon glow effects with box-shadow, RGB cycling animations
+- **Prefixes**: Terminal-style prefixes (`>>`, `>`, `<<`)
+- **Animations**: Pulse effects, hover scaling, RGB LED cycles
+
+## Project Structure
+
 ```
 src/
 ├── app/                    # Next.js App Router pages
 │   ├── cps/               # CPS test variants (1s, 5s, 10s, 100s, mobile, etc.)
+│   ├── gaming/            # Gaming-specific tests (butterfly, jitter, minecraft)
+│   ├── button-test/       # Mouse button functionality test
+│   ├── double-click-test/ # Double-click test
+│   ├── scroll-test/       # Mouse scroll wheel test
 │   ├── layout.tsx         # Root layout with SEO metadata
 │   └── page.tsx           # Homepage with mouse button test
 ├── components/
-│   ├── features/          # Feature-specific components
-│   │   ├── MouseButtonTest.tsx    # Interactive mouse button tester
-│   │   ├── MouseTestFaq.tsx       # FAQ component
-│   │   └── cps/                   # CPS testing components
-│   │       ├── CpsTest.tsx        # Main CPS test component
-│   │       ├── CpsTestSimplified.tsx
-│   │       ├── faq/               # CPS-specific FAQ data
-│   │       └── hooks/             # CPS-related hooks
-│   ├── layout/            # Layout components (Header, Footer, Navigation)
+│   ├── features/          # Feature-specific components (colocation architecture)
+│   │   ├── cps/           # CPS testing components
+│   │   │   ├── CpsTestCore.tsx     # Main CPS test logic
+│   │   │   ├── faq/               # CPS-specific FAQ data
+│   │   │   ├── hooks/             # CPS-related hooks
+│   │   │   ├── styles.css         # CPS-specific styles
+│   │   │   └── types.ts           # CPS-specific types
+│   │   ├── mouse-button/  # Mouse button test components
+│   │   ├── double-click/  # Double-click test components
+│   │   ├── scroll/        # Scroll test components
+│   │   ├── gaming/        # Gaming-specific test components
+│   │   └── MouseTestFaq.tsx       # General FAQ component
+│   ├── layout/            # Layout components
 │   │   ├── Header.tsx             # Unified navigation header
 │   │   ├── Footer.tsx             # Site footer
-│   │   ├── SimplePageLayout.tsx   # Standard page layout wrapper
-│   │   └── TestPageLayout.tsx     # Complex test page layout wrapper
+│   │   ├── PageLayout.tsx         # Basic page layout
+│   │   ├── TestPageLayout.tsx     # Test page layout wrapper
+│   │   └── ConfigurableHeroSection.tsx # Configurable hero section
 │   ├── seo/              # SEO components (structured data)
 │   ├── shared/           # Reusable components
+│   │   ├── TestStatsPanel.tsx     # Unified statistics panel
+│   │   ├── QuickActionsPanel.tsx  # Unified quick actions panel
+│   │   ├── PageFaq.tsx            # FAQ display component
+│   │   └── ErrorBoundary.tsx      # Error boundary wrapper
 │   └── ui/               # Base UI components (Button, Card, Badge)
 ├── hooks/                # Custom React hooks
 ├── lib/                  # Utilities and helpers
-│   ├── seo-helpers.ts    # SEO constants and helpers
-│   └── utils.ts          # General utilities (cn function)
 ├── types/               # TypeScript type definitions
 └── utils/               # Additional utilities
 ```
 
-### Design System
+### Feature-First Colocation Architecture
 
-The app uses a custom **cyberpunk/gaming aesthetic** with:
+Each feature follows the colocation pattern with complete self-containment:
 
-**Color Palette:**
-- Neon Green (`#00ff41`) - Primary/Matrix green
-- Electric Blue (`#00bfff`) - Secondary/Tech blue  
-- Cyber Pink (`#ff0080`) - Accent/Cyberpunk pink
-- Warning Orange (`#ff6600`) - Warning states
-- Hacker Purple (`#8a2be2`) - Special elements
-- RGB colors for LED effects
+```
+src/components/features/[feature-name]/
+├── [FeatureName]Core.tsx  # Main logic component
+├── index.ts               # Barrel exports
+├── styles.css             # Feature-specific styles
+├── types.ts               # Feature-specific types
+├── hooks/                 # Feature-specific hooks (if needed)
+├── faq/                   # Feature-specific FAQ data (if needed)
+└── README.md              # Feature documentation (if complex)
+```
 
-**Key Visual Elements:**
-- Black backgrounds with neon borders
-- Monospace fonts (JetBrains Mono)
-- Terminal-style prefixes (`>>`, `>`, `<<`)
-- ALL CAPS titles with bold weights
-- Corner decorations for sci-fi look
-- Glowing effects with box-shadow
-- RGB cycling animations
+## Development Guidelines
 
-### Core Components
-
-#### CpsTest Component (`src/components/features/cps/CpsTest.tsx`)
-- Supports multiple test types: left-click, right-click, spacebar, mobile tap
-- Real-time click counting with precise timing
-- Countdown mechanism (3-2-1) before test starts
-- localStorage integration for best scores and history
-- Safe localStorage handling with error boundaries
-- Different test durations (1s, 5s, 10s, 100s)
-
-#### MouseButtonTest Component
-- Interactive mouse button testing
-- Visual feedback for all mouse buttons (left, right, middle, back, forward)
-- Real-time button state visualization
-
-### State Management Patterns
-
-- **Local state**: useState for component-level state
-- **Performance optimization**: useCallback, useMemo for expensive operations
-- **Refs**: useRef for timers, intervals, and DOM references
-- **localStorage**: Custom hooks for persistent storage with error handling
-
-### SEO Strategy
-
-The app has comprehensive SEO optimization:
-- Rich metadata in layout.tsx
-- Structured data (FAQ schema)
-- SEO helper constants in lib/seo-helpers.ts
-- Content-rich FAQ sections for long-tail keywords
-- Internal linking strategy between different test types
-
-### Key Features
-
-1. **Multi-platform CPS Testing**: 1s, 5s, 10s, 100s variants + mobile/spacebar tests
-2. **Mouse Button Testing**: Interactive visual button tester
-3. **Performance Tracking**: localStorage-based score history
-4. **Gaming Focus**: Designed for Minecraft PvP, esports, competitive gaming
-5. **Mobile Support**: Touch-friendly interfaces and mobile-specific tests
-
-### Development Guidelines
-
-#### Component Patterns
-- Use TypeScript interfaces for all props
-- Implement error boundaries for localStorage operations
-- Use Tailwind classes following the cyberpunk theme
-- Prefer functional components with hooks
-- Extract reusable logic into custom hooks
-
-#### Layout Standardization
+### Layout Standardization
 - **ALL pages must use unified layout components** - never create custom headers
-- Use `SimplePageLayout` for standard content pages (hero + content structure)
+- Use `PageLayout` for basic content pages
 - Use `TestPageLayout` for complex test pages with sidebars and multiple sections
 - Both layouts include the unified `Header` component with navigation
 - Consistent header ensures proper navigation experience across all pages
 
-#### Styling Conventions
-- Use custom Tailwind color palette (neon-green, electric, cyber-pink, etc.)
-- Follow terminal/code aesthetic (monospace fonts, terminal prefixes)
-- Implement responsive design with mobile-first approach
-- Use CSS animations for gaming/tech feel
+### Component Development Standards
 
-#### Performance Considerations
-- CPS tests use precise timing with 100ms intervals
-- Event handlers optimized with useCallback
-- Large FAQ content managed efficiently
-- localStorage operations wrapped in try-catch
-
-#### Type Safety
-- Strict TypeScript configuration
-- Custom type definitions in src/types/
-- Proper typing for localStorage data
-- Error handling with proper types
-
-## Common Development Tasks
-
-### Adding New CPS Test Variants
-1. Create new page in `src/app/cps/[variant]/page.tsx`
-2. **MUST use `SimplePageLayout`** - import from `@/components/layout/SimplePageLayout`
-3. Import and configure CpsTest component with appropriate props
-4. Add navigation links in NavigationSection component
-5. Update FAQ content if needed
-
-**Example structure:**
+#### Test Component Interface
 ```tsx
-import SimplePageLayout from '@/components/layout/SimplePageLayout'
-import CpsTestCore from '@/components/features/cps/CpsTestCore'
+interface TestComponentProps<TResult> {
+  onResultChange?: (result: TResult) => void
+  onStatusChange?: (status: TestStatus) => void
+  onStatsChange?: (stats: TestStats) => void
+  onError?: (error: string | null) => void
+}
 
-export default function NewCpsPage() {
+type TestStatus = 'idle' | 'ready' | 'running' | 'finished'
+```
+
+#### Adding New Test Types (3-Minute Workflow)
+
+1. **Create Feature Component** (1 minute)
+```tsx
+// src/components/features/new-test/NewTestCore.tsx
+const NewTestCore: React.FC<TestProps> = ({ onStatsChange, onError }) => {
+  // Test logic implementation
+  return <Card>/* Test UI */</Card>
+}
+```
+
+2. **Create Page** (1 minute)
+```tsx
+// src/app/new-test/page.tsx
+import TestPageLayout from '@/components/layout/TestPageLayout'
+import NewTestCore from '@/components/features/new-test/NewTestCore'
+
+export default function NewTestPage() {
   return (
-    <SimplePageLayout
-      title="TEST NAME"
-      subtitle=">> DESCRIPTION <<"
-      description="Detailed description..."
-    >
-      <section className="mb-20">
-        <CpsTestCore duration={5} />
-      </section>
-    </SimplePageLayout>
+    <TestPageLayout
+      hero={<ConfigurableHeroSection config={heroConfig} />}
+      testArea={<NewTestCore />}
+      sidebar={<><TestStatsPanel /><QuickActionsPanel /></>}
+      faq={<PageFaq faqs={testFaqs} />}
+    />
   )
 }
 ```
 
-### Adding New Mouse Tests
-1. Create component in `src/components/features/`
-2. Add route in `src/app/` if needed
-3. Update navigation and SEO metadata
-4. Follow gaming/cyberpunk design patterns
+3. **Add Navigation** (1 minute)
+Update NavigationSection component and relevant quick action panels.
 
-### Modifying Design System
-1. Update colors in `tailwind.config.ts`
-2. Reference `GAMER_DESIGN_SYSTEM.md` for design principles
-3. Maintain cyberpunk aesthetic consistency
-4. Test across all component variants
+### Styling Conventions
+- Use custom Tailwind color palette (neon-green, electric, cyber-pink, etc.)
+- Follow cyberpunk/terminal aesthetic (monospace fonts, terminal prefixes)
+- Implement responsive design with mobile-first approach
+- Use CSS animations for gaming/tech feel with RGB cycling and glow effects
+
+### Performance & Type Safety
+- CPS tests use precise timing with 100ms intervals
+- Event handlers optimized with useCallback
+- Strict TypeScript configuration with custom type definitions
+- localStorage operations wrapped in try-catch with proper error handling
+
+### SEO Strategy
+- Rich metadata in layout.tsx
+- Structured data (FAQ schema) in seo/ components
+- SEO helper constants in lib/seo-helpers.ts
+- Content-rich FAQ sections for long-tail keywords
+- Internal linking strategy between different test types
+
+## Key Features
+
+1. **Multi-platform CPS Testing**: 1s, 5s, 10s, 100s variants + mobile/spacebar tests
+2. **Mouse Button Testing**: Interactive visual button tester with real-time feedback
+3. **Gaming-Specific Tests**: Jitter click, butterfly click, Minecraft CPS optimization
+4. **Performance Tracking**: localStorage-based score history and analytics
+5. **Mobile Support**: Touch-friendly interfaces and mobile-specific test variants
+6. **Cyberpunk Design**: Gaming-focused aesthetic with RGB effects and neon styling
+
+## Common Development Tasks
+
+### Modifying Existing Tests
+- Only modify the corresponding Core component in features/
+- Layout and statistics panels automatically remain consistent
+- Follow existing error handling and localStorage patterns
+
+### Adding Unified Features
+- Add new components to the Shared layer
+- All test pages automatically inherit new functionality
+- Maintain consistency with cyberpunk design system
 
 ### SEO Content Updates
 1. Modify constants in `src/lib/seo-helpers.ts`
-2. Update FAQ arrays in relevant components
+2. Update FAQ arrays in relevant feature directories
 3. Ensure structured data compliance
 4. Test internal linking structure
 
-This is a specialized gaming/tech tool with a unique aesthetic - maintain the cyberpunk theme and gaming focus when making changes.
-
 ## Recent Updates
 
-### Layout Standardization (August 2025)
-- **Fixed**: All CPS test pages now use unified layout components
-- **Updated pages**: 1-second, 10-second, 100-second, right-click, spacebar, mobile CPS tests
-- **Before**: Pages had custom headers or no headers, inconsistent navigation
-- **After**: All pages use `SimplePageLayout` with unified `Header` component
-- **Impact**: Consistent navigation experience across entire application
+### Feature-First Colocation Architecture (August 2025)
+- **Standardized**: All features now follow colocation pattern with complete self-containment
+- **Enhanced maintainability**: Each feature contains its own components, styles, types, and logic
+- **Improved discoverability**: Related code is grouped together for easier navigation
+- **Better separation of concerns**: Clear boundaries between features and shared functionality
 
-### Navigation Issues Resolved
-- **butterfly-click page**: Already had correct layout, no 404 issues in code
-- **All CPS variants**: Now have consistent header with navigation links
-- **SEO improvement**: Better internal linking structure with unified navigation
+### Layout Unification (August 2025)  
+- **Fixed**: All pages now use unified layout components
+- **Before**: Inconsistent headers and navigation across pages
+- **After**: Consistent navigation experience with unified Header component
+- **Impact**: Better UX and SEO with proper internal linking structure
+
+This Mouse Test application is designed to be the definitive gaming-focused mouse testing tool with a unique cyberpunk aesthetic that appeals to gamers, competitive players, and tech enthusiasts.
