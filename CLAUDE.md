@@ -115,7 +115,7 @@ src/
 │   │   ├── double-click/  # Double-click test components
 │   │   ├── scroll/        # Scroll test components
 │   │   ├── gaming/        # Gaming-specific test components
-│   │   └── MouseTestFaq.tsx       # General FAQ component
+│   │   └── [REMOVED - MouseTestFaq.tsx was dead code]
 │   ├── layout/            # Layout components
 │   │   ├── Header.tsx             # Unified navigation header
 │   │   ├── Footer.tsx             # Site footer
@@ -126,7 +126,9 @@ src/
 │   ├── shared/           # Reusable components
 │   │   ├── TestStatsPanel.tsx     # Unified statistics panel
 │   │   ├── QuickActionsPanel.tsx  # Unified quick actions panel
-│   │   ├── PageFaq.tsx            # FAQ display component
+│   │   ├── PageFaq.tsx            # FAQ component (backward compatible)
+│   │   ├── FaqWithSeo.tsx         # FAQ with SEO integration
+│   │   ├── FaqDisplay.tsx         # Pure UI FAQ display
 │   │   └── ErrorBoundary.tsx      # Error boundary wrapper
 │   └── ui/               # Base UI components (Button, Card, Badge)
 ├── hooks/                # Custom React hooks
