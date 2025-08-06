@@ -176,13 +176,15 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
                 top: '8%',
                 left: '8%',
                 width: '35%',
-                height: '40%'
+                height: '40%',
+                pointerEvents: 'none'
               }}
             >
-              <div className="flex flex-col items-center justify-center h-full">
-                <span className="mb-2 font-mono text-sm font-bold">LEFT</span>
+              <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
+                <span className="mb-2 font-mono text-sm font-bold" style={{ pointerEvents: 'none' }}>LEFT</span>
                 <Badge variant={activeButtons.left ? "default" : "secondary"} 
-                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
+                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current"
+                       style={{ pointerEvents: 'none' }}>
                   {clickCounts.left}
                 </Badge>
               </div>
@@ -199,13 +201,15 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
                 top: '8%',
                 right: '8%',
                 width: '35%',
-                height: '40%'
+                height: '40%',
+                pointerEvents: 'none'
               }}
             >
-              <div className="flex flex-col items-center justify-center h-full">
-                <span className="mb-2 font-mono text-sm font-bold">RIGHT</span>
+              <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
+                <span className="mb-2 font-mono text-sm font-bold" style={{ pointerEvents: 'none' }}>RIGHT</span>
                 <Badge variant={activeButtons.right ? "default" : "secondary"} 
-                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
+                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current"
+                       style={{ pointerEvents: 'none' }}>
                   {clickCounts.right}
                 </Badge>
               </div>
@@ -223,13 +227,15 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
                 left: '50%',
                 transform: 'translateX(-50%)',
                 width: '18%',
-                height: '30%'
+                height: '30%',
+                pointerEvents: 'none'
               }}
             >
-              <div className="flex flex-col items-center justify-center h-full">
-                <span className="mb-1 font-mono text-xs font-bold">MID</span>
+              <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
+                <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>MID</span>
                 <Badge variant={activeButtons.middle ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       style={{ pointerEvents: 'none' }}>
                   {clickCounts.middle}
                 </Badge>
               </div>
@@ -246,13 +252,15 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
                 bottom: '25%',
                 left: '8%',
                 width: '28%',
-                height: '18%'
+                height: '18%',
+                pointerEvents: 'none'
               }}
             >
-              <div className="flex flex-col items-center justify-center h-full">
-                <span className="mb-1 font-mono text-xs font-bold">BACK</span>
+              <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
+                <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>BACK</span>
                 <Badge variant={activeButtons.back ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       style={{ pointerEvents: 'none' }}>
                   {clickCounts.back}
                 </Badge>
               </div>
@@ -269,13 +277,15 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
                 bottom: '25%',
                 right: '8%',
                 width: '28%',
-                height: '18%'
+                height: '18%',
+                pointerEvents: 'none'
               }}
             >
-              <div className="flex flex-col items-center justify-center h-full">
-                <span className="mb-1 font-mono text-xs font-bold">FWD</span>
+              <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
+                <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>FWD</span>
                 <Badge variant={activeButtons.forward ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       style={{ pointerEvents: 'none' }}>
                   {clickCounts.forward}
                 </Badge>
               </div>
@@ -283,16 +293,16 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
 
             {/* Active indicator */}
             {hasActiveButtons && (
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-rgb-red via-rgb-green to-rgb-blue rounded-full rgb-glow flex items-center justify-center border-2 border-white">
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-rgb-red via-rgb-green to-rgb-blue rounded-full rgb-glow flex items-center justify-center border-2 border-white" style={{ pointerEvents: 'none' }}>
                 <Zap className="w-4 h-4 text-white drop-shadow-lg" />
               </div>
             )}
 
             {/* Corner decorations */}
-            <div className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-neon-green-500"></div>
-            <div className="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-neon-green-500"></div>
-            <div className="absolute bottom-1 left-1 w-3 h-3 border-l-2 border-b-2 border-neon-green-500"></div>
-            <div className="absolute bottom-1 right-1 w-3 h-3 border-r-2 border-b-2 border-neon-green-500"></div>
+            <div className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-neon-green-500" style={{ pointerEvents: 'none' }}></div>
+            <div className="absolute top-1 right-1 w-3 h-3 border-r-2 border-t-2 border-neon-green-500" style={{ pointerEvents: 'none' }}></div>
+            <div className="absolute bottom-1 left-1 w-3 h-3 border-l-2 border-b-2 border-neon-green-500" style={{ pointerEvents: 'none' }}></div>
+            <div className="absolute bottom-1 right-1 w-3 h-3 border-r-2 border-b-2 border-neon-green-500" style={{ pointerEvents: 'none' }}></div>
           </div>
         </div>
 
