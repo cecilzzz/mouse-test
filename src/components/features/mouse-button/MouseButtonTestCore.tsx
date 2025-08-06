@@ -183,7 +183,7 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
                 <span className="mb-2 font-mono text-sm font-bold" style={{ pointerEvents: 'none' }}>LEFT</span>
                 <Badge variant={activeButtons.left ? "default" : "secondary"} 
-                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current"
+                       className="font-mono text-lg px-3 py-1 border-2 border-current"
                        style={{ pointerEvents: 'none' }}>
                   {clickCounts.left}
                 </Badge>
@@ -208,7 +208,7 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
                 <span className="mb-2 font-mono text-sm font-bold" style={{ pointerEvents: 'none' }}>RIGHT</span>
                 <Badge variant={activeButtons.right ? "default" : "secondary"} 
-                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current"
+                       className="font-mono text-lg px-3 py-1 border-2 border-current"
                        style={{ pointerEvents: 'none' }}>
                   {clickCounts.right}
                 </Badge>
@@ -234,7 +234,7 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
                 <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>MID</span>
                 <Badge variant={activeButtons.middle ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       className="font-mono text-xs px-1 py-0.5 border border-current"
                        style={{ pointerEvents: 'none' }}>
                   {clickCounts.middle}
                 </Badge>
@@ -259,7 +259,7 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
                 <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>BACK</span>
                 <Badge variant={activeButtons.back ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       className="font-mono text-xs px-1 py-0.5 border border-current"
                        style={{ pointerEvents: 'none' }}>
                   {clickCounts.back}
                 </Badge>
@@ -284,7 +284,7 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               <div className="flex flex-col items-center justify-center h-full" style={{ pointerEvents: 'none' }}>
                 <span className="mb-1 font-mono text-xs font-bold" style={{ pointerEvents: 'none' }}>FWD</span>
                 <Badge variant={activeButtons.forward ? "default" : "secondary"} 
-                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current"
+                       className="font-mono text-xs px-1 py-0.5 border border-current"
                        style={{ pointerEvents: 'none' }}>
                   {clickCounts.forward}
                 </Badge>
