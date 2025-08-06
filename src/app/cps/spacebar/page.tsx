@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import Footer from '@/components/layout/Footer'
-import CpsTest from '@/components/features/cps/CpsTest'
+import SimplePageLayout from '@/components/layout/SimplePageLayout'
+import CpsTestCore from '@/components/features/cps/CpsTestCore'
 
 export const metadata: Metadata = {
   title: "Spacebar CPS Test - Keyboard Speed Test | Mouse Test",
@@ -18,52 +18,21 @@ export const metadata: Metadata = {
 
 export default function SpacebarCpsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-8 px-4 border-b border-neon-green-500/20">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-2xl font-black hero-gradient hover:scale-105 transition-transform">
-                MOUSE TEST
-              </a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <a href="/cps" className="text-electric-400 font-mono hover:text-electric-300">CPS Test</a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <span className="text-neon-green-400 font-mono font-bold">Spacebar</span>
-            </div>
-            <div className="hidden md:flex gap-4">
-              <a href="/cps/5-second" className="cyber-button px-4 py-2">Mouse Test</a>
-              <a href="/cps/right-click" className="cyber-button px-4 py-2">Right Click</a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Info Banner */}
-      <div className="bg-gradient-to-r from-electric-500/20 to-hacker-purple-500/20 border-y border-electric-500/50 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-3 text-center">
-            <span className="text-2xl">⌨️</span>
-            <div>
-              <p className="text-electric-400 font-bold font-mono">SPACEBAR SPEED TEST</p>
-              <p className="text-sm text-muted-foreground">Press the spacebar as fast as you can when the test starts</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <CpsTest 
+    <SimplePageLayout
+      title="SPACEBAR CPS TEST"
+      subtitle=">> KEYBOARD SPEED CHALLENGE <<"
+      description="Test your spacebar clicking speed with our keyboard CPS test. Perfect for testing keyboard responsiveness and finger speed on the space bar. Press the spacebar as fast as you can when the test starts."
+    >
+      <section className="mb-20">
+        <CpsTestCore 
           duration={5} 
           testType="spacebar"
           title="SPACEBAR CPS TEST"
           description=">> Keyboard Speed Challenge"
         />
+      </section>
         
-        {/* Additional Info */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-black text-neon-green-400 mb-4 font-mono">
               {'>> '}KEYBOARD WARRIOR MODE
@@ -113,8 +82,7 @@ export default function SpacebarCpsPage() {
           </div>
         </section>
 
-        {/* Keyboard Types */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}KEYBOARD PERFORMANCE GUIDE
@@ -168,8 +136,7 @@ export default function SpacebarCpsPage() {
           </div>
         </section>
 
-        {/* Spacebar Techniques */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}SPACEBAR TECHNIQUES
@@ -215,8 +182,7 @@ export default function SpacebarCpsPage() {
           </div>
         </section>
 
-        {/* Gaming Applications */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}SPACEBAR IN GAMING
@@ -265,8 +231,7 @@ export default function SpacebarCpsPage() {
           </div>
         </section>
 
-        {/* Navigation to other tests */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}TEST OTHER INPUTS
@@ -288,9 +253,6 @@ export default function SpacebarCpsPage() {
             </a>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SimplePageLayout>
   )
 }

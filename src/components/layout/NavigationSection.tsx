@@ -1,4 +1,4 @@
-import { Zap, Target, Mouse, Settings } from 'lucide-react'
+import { Zap, Target, Mouse, Settings, MousePointer2, Heart, Play } from 'lucide-react'
 import type { TestTool } from '@/types'
 
 /**
@@ -84,6 +84,50 @@ const NavigationSection: React.FC = () => {
       iconColor: 'text-black',
       titleColor: 'text-warning-orange-400',
       borderColor: 'border-warning-orange-400'
+    },
+    {
+      href: '/button-test',
+      icon: MousePointer2,
+      title: 'BUTTON TEST',
+      description: 'ALL BUTTONS',
+      gradient: 'from-electric-500 to-neon-green-500',
+      border: 'border-electric-500/50 hover:border-electric-500',
+      iconColor: 'text-white',
+      titleColor: 'text-electric-400',
+      borderColor: 'border-electric-400'
+    },
+    {
+      href: '/gaming/jitter-click',
+      icon: Zap,
+      title: 'JITTER CLICK',
+      description: 'GAMING TECHNIQUE',
+      gradient: 'from-hacker-purple-500 to-neon-green-500',
+      border: 'border-hacker-purple-500/50 hover:border-hacker-purple-500',
+      iconColor: 'text-white',
+      titleColor: 'text-hacker-purple-400',
+      borderColor: 'border-hacker-purple-400'
+    },
+    {
+      href: '/gaming/butterfly-click',
+      icon: Heart,
+      title: 'BUTTERFLY CLICK',
+      description: 'FINGER COORDINATION',
+      gradient: 'from-cyber-pink-500 to-electric-500',
+      border: 'border-cyber-pink-500/50 hover:border-cyber-pink-500',
+      iconColor: 'text-white',
+      titleColor: 'text-cyber-pink-400',
+      borderColor: 'border-cyber-pink-400'
+    },
+    {
+      href: '/gaming/minecraft-cps',
+      icon: Play,
+      title: 'MINECRAFT CPS',
+      description: 'PVP OPTIMIZATION',
+      gradient: 'from-neon-green-500 to-warning-orange-500',
+      border: 'border-neon-green-500/50 hover:border-neon-green-500',
+      iconColor: 'text-black',
+      titleColor: 'text-neon-green-400',
+      borderColor: 'border-neon-green-400'
     }
   ]
 
@@ -98,7 +142,7 @@ const NavigationSection: React.FC = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {testTools.map((tool) => {
           const Icon = tool.icon
           return (

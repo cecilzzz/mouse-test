@@ -62,6 +62,46 @@ export interface CpsTestResult {
   timestamp: Date
 }
 
+export interface DoubleClickTestResult {
+  averageInterval: number
+  minInterval: number
+  maxInterval: number
+  totalDoubleClicks: number
+  failedDoubleClicks: number
+  consistency: number
+  timestamp: Date
+}
+
+export interface ScrollTestResult {
+  totalScrolls: number
+  upScrolls: number
+  downScrolls: number
+  leftScrolls: number
+  rightScrolls: number
+  middleClicks: number
+  timestamp: Date
+}
+
+export interface JitterClickTestResult {
+  clicksPerSecond: number
+  totalClicks: number
+  testDuration: number
+  jitterTechnique: 'jitter' | 'regular'
+  averageInterval: number
+  consistency: number
+  timestamp: Date
+}
+
+export interface ButterflyClickTestResult {
+  clicksPerSecond: number
+  totalClicks: number
+  testDuration: number
+  butterflyTechnique: 'butterfly' | 'regular'
+  averageInterval: number
+  fingerCoordination: number
+  timestamp: Date
+}
+
 export interface DpiTestResult {
   dpi: number
   pixelsPerInch: number

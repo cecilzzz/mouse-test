@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import Footer from '@/components/layout/Footer'
-import CpsTest from '@/components/features/cps/CpsTest'
+import SimplePageLayout from '@/components/layout/SimplePageLayout'
+import CpsTestCore from '@/components/features/cps/CpsTestCore'
 
 export const metadata: Metadata = {
   title: "Mobile CPS Test - Touch Screen Speed Test | Mouse Test",
@@ -18,52 +18,21 @@ export const metadata: Metadata = {
 
 export default function MobileCpsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-8 px-4 border-b border-neon-green-500/20">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-2xl font-black hero-gradient hover:scale-105 transition-transform">
-                MOUSE TEST
-              </a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <a href="/cps" className="text-electric-400 font-mono hover:text-electric-300">CPS Test</a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <span className="text-neon-green-400 font-mono font-bold">Mobile</span>
-            </div>
-            <div className="hidden md:flex gap-4">
-              <a href="/cps/5-second" className="cyber-button px-4 py-2">Desktop</a>
-              <a href="/cps/spacebar" className="cyber-button px-4 py-2">Keyboard</a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Info Banner */}
-      <div className="bg-gradient-to-r from-cyber-pink-500/20 to-electric-500/20 border-y border-cyber-pink-500/50 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-3 text-center">
-            <span className="text-2xl">📱</span>
-            <div>
-              <p className="text-cyber-pink-400 font-bold font-mono">MOBILE TOUCH TEST</p>
-              <p className="text-sm text-muted-foreground">Optimized for smartphones and tablets</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <CpsTest 
+    <SimplePageLayout
+      title="MOBILE CPS TEST"
+      subtitle=">> TOUCH SCREEN SPEED CHALLENGE <<"
+      description="Test your touch screen tapping speed with our mobile CPS test. Perfect for smartphones, tablets, and touchscreen devices. Optimized for mobile touch interfaces."
+    >
+      <section className="mb-20">
+        <CpsTestCore 
           duration={5} 
           testType="mobile"
           title="MOBILE CPS TEST"
           description=">> Touch Screen Speed Challenge"
         />
+      </section>
         
-        {/* Additional Info */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-black text-neon-green-400 mb-4 font-mono">
               {'>> '}MOBILE OPTIMIZATION
@@ -113,8 +82,7 @@ export default function MobileCpsPage() {
           </div>
         </section>
 
-        {/* Mobile Techniques */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}MOBILE TAPPING TECHNIQUES
@@ -160,8 +128,7 @@ export default function MobileCpsPage() {
           </div>
         </section>
 
-        {/* Device Optimization */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}DEVICE OPTIMIZATION
@@ -215,8 +182,7 @@ export default function MobileCpsPage() {
           </div>
         </section>
 
-        {/* Mobile Gaming */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}MOBILE GAMING APPLICATIONS
@@ -265,8 +231,7 @@ export default function MobileCpsPage() {
           </div>
         </section>
 
-        {/* Pro Tips */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="glass-effect p-8 rounded-lg border-neon-green-500/50">
             <div className="text-center mb-6">
               <h3 className="text-xl font-black text-neon-green-400 mb-4 font-mono">
@@ -299,8 +264,7 @@ export default function MobileCpsPage() {
           </div>
         </section>
 
-        {/* Navigation to other tests */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}DESKTOP ALTERNATIVES
@@ -322,9 +286,6 @@ export default function MobileCpsPage() {
             </a>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SimplePageLayout>
   )
 }

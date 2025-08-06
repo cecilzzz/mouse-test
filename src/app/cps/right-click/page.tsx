@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import Footer from '@/components/layout/Footer'
-import CpsTest from '@/components/features/cps/CpsTest'
+import SimplePageLayout from '@/components/layout/SimplePageLayout'
+import CpsTestCore from '@/components/features/cps/CpsTestCore'
 
 export const metadata: Metadata = {
   title: "Right Click CPS Test - Right Mouse Button Speed Test | Mouse Test",
@@ -18,52 +18,21 @@ export const metadata: Metadata = {
 
 export default function RightClickCpsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-8 px-4 border-b border-neon-green-500/20">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-2xl font-black hero-gradient hover:scale-105 transition-transform">
-                MOUSE TEST
-              </a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <a href="/cps" className="text-electric-400 font-mono hover:text-electric-300">CPS Test</a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <span className="text-neon-green-400 font-mono font-bold">Right Click</span>
-            </div>
-            <div className="hidden md:flex gap-4">
-              <a href="/cps/5-second" className="cyber-button px-4 py-2">Left Click</a>
-              <a href="/cps/spacebar" className="cyber-button px-4 py-2">Spacebar</a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Info Banner */}
-      <div className="bg-gradient-to-r from-warning-orange-500/20 to-electric-500/20 border-y border-warning-orange-500/50 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-3 text-center">
-            <span className="text-2xl">🖱️</span>
-            <div>
-              <p className="text-warning-orange-400 font-bold font-mono">RIGHT MOUSE BUTTON TEST</p>
-              <p className="text-sm text-muted-foreground">Context menus will be disabled during the test</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <CpsTest 
+    <SimplePageLayout
+      title="RIGHT CLICK CPS TEST"
+      subtitle=">> RIGHT MOUSE BUTTON SPEED CHALLENGE <<"
+      description="Test your right-click speed with our specialized right mouse button CPS test. Perfect for testing right-click performance in gaming and professional use. Context menus will be disabled during the test."
+    >
+      <section className="mb-20">
+        <CpsTestCore 
           duration={5} 
           testType="right"
           title="RIGHT CLICK CPS TEST"
           description=">> Right Mouse Button Speed Challenge"
         />
+      </section>
         
-        {/* Additional Info */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-black text-neon-green-400 mb-4 font-mono">
               {'>> '}RIGHT BUTTON SPECIALIST
@@ -112,8 +81,7 @@ export default function RightClickCpsPage() {
           </div>
         </section>
 
-        {/* Right Click Techniques */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}RIGHT-CLICK TECHNIQUES
@@ -159,8 +127,7 @@ export default function RightClickCpsPage() {
           </div>
         </section>
 
-        {/* Gaming Applications */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}GAMING APPLICATIONS
@@ -203,8 +170,7 @@ export default function RightClickCpsPage() {
           </div>
         </section>
 
-        {/* Navigation to other tests */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}OTHER BUTTON TESTS
@@ -226,9 +192,6 @@ export default function RightClickCpsPage() {
             </a>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SimplePageLayout>
   )
 }

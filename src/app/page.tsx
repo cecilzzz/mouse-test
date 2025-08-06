@@ -1,10 +1,16 @@
-import HeroSection from '@/components/layout/HeroSection'
+'use client'
+
+import { useState, useCallback } from 'react'
+import PageLayout from '@/components/layout/PageLayout'
+import ConfigurableHeroSection from '@/components/layout/ConfigurableHeroSection'
 import NavigationSection from '@/components/layout/NavigationSection'
-import Footer from '@/components/layout/Footer'
-import MouseButtonTest from '@/components/features/MouseButtonTest'
+import MouseButtonTestCore from '@/components/features/mouse-button/MouseButtonTestCore'
+import TestStatsPanel from '@/components/shared/TestStatsPanel'
+import QuickActionsPanel from '@/components/shared/QuickActionsPanel'
 import PageFaq from '@/components/shared/PageFaq'
 import type { FaqItem } from '@/types'
 import { links, phrases } from '@/lib/seo-helpers'
+import { Mouse, Terminal, Target, Settings, Zap, RotateCcw } from 'lucide-react'
 
 // Homepage FAQ - comprehensive mouse testing guide with rich content
 const homepageFaqs: FaqItem[] = [
@@ -71,16 +77,79 @@ const homepageFaqs: FaqItem[] = [
 ]
 
 export default function Home() {
+  const [mouseStats, setMouseStats] = useState({
+    totalClicks: 0,
+    buttonCounts: { left: 0, right: 0, middle: 0, back: 0, forward: 0 },
+    activeButtons: { left: false, right: false, middle: false, back: false, forward: false }
+  })
+  const [error, setError] = useState<string | null>(null)
+
+  const handleMouseStatsChange = useCallback((stats: typeof mouseStats) => {
+    setMouseStats(stats)
+  }, [])
+
+  const handleError = useCallback((error: string | null) => {
+    setError(error)
+  }, [])
+
+  const heroConfig = {
+    title: "MOUSE TEST",
+    subtitle: ">> GAMING HARDWARE DIAGNOSTICS <<",
+    description: "PROFESSIONAL mouse testing suite for button functionality, click speed (CPS), DPI analysis, and performance optimization",
+    icon: <Mouse className="w-10 h-10 text-black" />,
+    secondIcon: <Terminal className="w-10 h-10 text-white" />,
+    badges: [
+      { icon: Target, text: "INSTANT RESULTS", color: "neon-green" as const },
+      { icon: Settings, text: "NO INSTALL", color: "electric" as const },
+      { icon: Zap, text: "GAMING READY", color: "cyber-pink" as const }
+    ]
+  }
+
+  const statsItems = [
+    { label: "TOTAL CLICKS", value: mouseStats.totalClicks, variant: "neon-green" as const },
+    { label: "LEFT", value: mouseStats.buttonCounts.left, variant: "electric" as const },
+    { label: "RIGHT", value: mouseStats.buttonCounts.right, variant: "cyber-pink" as const },
+    { label: "MIDDLE", value: mouseStats.buttonCounts.middle, variant: "warning-orange" as const }
+  ]
+
+  const quickActions = [
+    { label: "RESET ALL", onClick: () => window.location.reload(), variant: "warning" as const, icon: RotateCcw },
+    { label: "CPS TEST >", href: "/cps", variant: "cyber" as const },
+    { label: "DOUBLE CLICK >", href: "/double-click-test", variant: "purple" as const }
+  ]
+
   return (
-    <div className="min-h-screen bg-background">
+    <PageLayout>
       {/* Hero Section */}
-      <HeroSection />
+      <ConfigurableHeroSection config={heroConfig} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
         {/* Mouse Button Test Tool */}
         <section className="mb-20">
-          <MouseButtonTest />
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Test Area */}
+            <div className="lg:col-span-2">
+              <MouseButtonTestCore
+                onStatsChange={handleMouseStatsChange}
+                onError={handleError}
+              />
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <TestStatsPanel
+                title="CLICK STATS"
+                stats={statsItems}
+                error={error}
+                onErrorDismiss={() => setError(null)}
+              />
+              <QuickActionsPanel
+                title="QUICK ACTIONS"
+                actions={quickActions}
+              />
+            </div>
+          </div>
         </section>
 
         {/* Quick Navigation */}
@@ -95,9 +164,6 @@ export default function Home() {
           />
         </section>
       </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </PageLayout>
   )
 }

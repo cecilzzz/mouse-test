@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import Footer from '@/components/layout/Footer'
-import CpsTest from '@/components/features/cps/CpsTest'
+import SimplePageLayout from '@/components/layout/SimplePageLayout'
+import CpsTestCore from '@/components/features/cps/CpsTestCore'
 
 export const metadata: Metadata = {
   title: "10 Second CPS Test - Extended Click Speed Test | Mouse Test",
@@ -18,38 +18,20 @@ export const metadata: Metadata = {
 
 export default function TenSecondCpsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-8 px-4 border-b border-neon-green-500/20">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-2xl font-black hero-gradient hover:scale-105 transition-transform">
-                MOUSE TEST
-              </a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <a href="/cps" className="text-electric-400 font-mono hover:text-electric-300">CPS Test</a>
-              <span className="text-muted-foreground font-mono">{'>'}</span>
-              <span className="text-neon-green-400 font-mono font-bold">10 Second</span>
-            </div>
-            <div className="hidden md:flex gap-4">
-              <a href="/cps/5-second" className="cyber-button px-4 py-2">5S Test</a>
-              <a href="/cps/100-second" className="cyber-button px-4 py-2">100S Test</a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <CpsTest 
+    <SimplePageLayout
+      title="10 SECOND CPS TEST"
+      subtitle=">> EXTENDED ENDURANCE CHALLENGE <<"
+      description="Test your clicking consistency and endurance with our 10-second CPS test. Perfect for measuring sustained click performance and accuracy."
+    >
+      <section className="mb-20">
+        <CpsTestCore 
           duration={10} 
           title="10 SECOND CPS TEST"
           description=">> Extended Endurance Challenge"
         />
+      </section>
         
-        {/* Additional Info */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-black text-neon-green-400 mb-4 font-mono">
               {'>> '}10 SECOND ENDURANCE
@@ -99,8 +81,7 @@ export default function TenSecondCpsPage() {
           </div>
         </section>
 
-        {/* Strategy Tips */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}10-SECOND STRATEGY
@@ -150,8 +131,7 @@ export default function TenSecondCpsPage() {
           </div>
         </section>
 
-        {/* Navigation to other tests */}
-        <section className="mt-16">
+      <section className="mb-16">
           <div className="text-center mb-8">
             <h3 className="text-xl font-black text-electric-400 mb-4 font-mono">
               {'>> '}OTHER DURATIONS
@@ -173,9 +153,6 @@ export default function TenSecondCpsPage() {
             </a>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SimplePageLayout>
   )
 }

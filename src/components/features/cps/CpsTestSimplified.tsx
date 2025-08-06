@@ -134,7 +134,7 @@ const CpsTestSimplified: React.FC<CpsTestProps> = ({
                     {title || `${duration}S CPS TEST`}
                   </CardTitle>
                   <CardDescription className="text-lg mt-1 font-mono text-electric-600 dark:text-electric-400">
-                    {description || `{'>> '}{duration} Second Click Speed Test`}
+                    {description || `>> ${duration} Second Click Speed Test`}
                   </CardDescription>
                 </div>
               </div>
