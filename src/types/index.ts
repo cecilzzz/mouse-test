@@ -5,22 +5,6 @@
  * Only includes application-specific types, not React built-ins.
  */
 
-// Mouse Testing
-export interface MouseButtonState {
-  left: boolean
-  right: boolean  
-  middle: boolean
-  back: boolean
-  forward: boolean
-}
-
-export interface ClickCount {
-  left: number
-  right: number
-  middle: number
-  back: number
-  forward: number
-}
 
 // UI Components
 export interface TestTool {

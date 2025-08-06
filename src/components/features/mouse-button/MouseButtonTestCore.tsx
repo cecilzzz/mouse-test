@@ -6,19 +6,9 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { MouseButtonState, ClickCount } from '@/types'
+import type { MouseButtonState, ClickCount, MouseButtonStats, MouseButtonTestCoreProps } from './types'
+import './styles.css'
 
-interface MouseButtonStats {
-  totalClicks: number
-  buttonCounts: ClickCount
-  activeButtons: MouseButtonState
-}
-
-interface MouseButtonTestCoreProps {
-  onStatsChange?: (stats: MouseButtonStats) => void
-  onError?: (error: string | null) => void
-  className?: string
-}
 
 /**
  * MouseButtonTestCore - 滑鼠按鈕測試器

@@ -1,0 +1,41 @@
+/**
+ * Mouse Button Test Component Styles
+ * 
+ * 專屬於鼠標按鈕測試組件的樣式定義
+ * 包含按鈕狀態樣式和相關動畫效果
+ */
+
+/* 基礎鼠標按鈕樣式 */
+.mouse-button {
+  @apply transition-all duration-150 ease-out;
+  @apply hover:shadow-lg hover:shadow-neon-green-500/25;
+  @apply active:animate-click-feedback;
+  @apply border-2 border-solid;
+  @apply flex items-center justify-center;
+  min-height: 3rem;
+  min-width: 3rem;
+}
+
+/* 激活狀態樣式 - 霓虹綠高亮 */
+.mouse-button-active {
+  @apply bg-neon-green-500 border-neon-green-400 text-black;
+  @apply shadow-lg shadow-neon-green-500/50;
+}
+
+/* 非激活狀態樣式 - 深灰色調 */
+.mouse-button-inactive {
+  @apply bg-gray-800 dark:bg-gray-900 border-gray-600 dark:border-gray-700;
+  @apply text-gray-300 dark:text-gray-400;
+  @apply hover:border-electric-500 hover:text-electric-400;
+}
+
+/* 點擊反饋動畫 */
+@keyframes click-feedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.animate-click-feedback {
+  animation: click-feedback 0.15s ease-out;
+}
