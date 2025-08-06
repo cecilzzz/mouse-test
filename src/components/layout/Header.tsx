@@ -223,23 +223,18 @@ const Header = () => {
         )}
       </nav>
 
-      {/* Close dropdowns when clicking outside */}
+      {/* 🎯 點擊外部關閉下拉菜單 */}
       {activeDropdown && (
         <div 
           className="fixed inset-0 z-40" 
-          onClick={(e) => {
-            e.stopPropagation()
-            setActiveDropdown(null)
-          }}
+          onClick={() => setActiveDropdown(null)}
         />
       )}
+      {/* 🎯 點擊外部關閉手機菜單 */}
       {isMenuOpen && (
         <div 
           className="fixed inset-0 z-30" 
-          onClick={(e) => {
-            e.stopPropagation()
-            setIsMenuOpen(false)
-          }}
+          onClick={() => setIsMenuOpen(false)}
         />
       )}
     </header>
