@@ -1,19 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Menu, X, Mouse, ChevronDown } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const headerRef = useRef<HTMLElement>(null)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
   }
 
-  // Handle ESC key and clicks outside
+  // 🔧 【點擊外部關閉邏輯】處理ESC鍵和點擊外部
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -22,9 +23,22 @@ const Header = () => {
       }
     }
 
+    const handleClickOutside = (event: MouseEvent) => {
+      // 🚦 檢查點擊是否在header區域外部
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null)
+        setIsMenuOpen(false)
+      }
+    }
+
+    // 📝 只在菜單開啟時才監聽點擊事件
     if (activeDropdown || isMenuOpen) {
       document.addEventListener('keydown', handleEscKey)
-      return () => document.removeEventListener('keydown', handleEscKey)
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        document.removeEventListener('keydown', handleEscKey)
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
     }
   }, [activeDropdown, isMenuOpen])
 
@@ -45,7 +59,10 @@ const Header = () => {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b-2 border-neon-green-500/50">
+    <header 
+      ref={headerRef}
+      className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b-2 border-neon-green-500/50"
+    >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
@@ -222,21 +239,12 @@ const Header = () => {
           </div>
         )}
       </nav>
-
-      {/* 🎯 點擊外部關閉下拉菜單 */}
-      {activeDropdown && (
-        <div 
-          className="fixed inset-0 z-40" 
-          onClick={() => setActiveDropdown(null)}
-        />
-      )}
-      {/* 🎯 點擊外部關閉手機菜單 */}
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 z-30" 
-          onClick={() => setIsMenuOpen(false)}
-        />
-      )}
+      {/* 
+        💡 點擊外部關閉邏輯已改用useEffect + ref方式實現
+        - 更可靠的事件處理
+        - 避免overlay層級衝突
+        - 支持所有瀏覽器事件
+      */}
     </header>
   )
 }
