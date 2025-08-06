@@ -152,6 +152,264 @@ src/components/features/[feature-name]/
 └── README.md              # Feature documentation (if complex)
 ```
 
+## 代碼注釋規範指南
+
+> **CRITICAL REQUIREMENT**: 專為編程能力有限的開發者設計的繁體中文注釋標準
+
+### 核心原則
+
+#### 1. 使用繁體中文注釋
+- **所有注釋必須使用繁體中文**
+- 技術術語可保留英文，但需要中文解釋
+- 變數名和函數名保持英文，但要有中文說明
+
+#### 2. 用生活化比喻解釋概念
+- 複雜概念用日常生活的比喻來解釋
+- 避免過於技術性的術語
+- 讓非程序員也能理解代碼在做什麼
+
+### 注釋格式規範
+
+#### 組件頂部注釋格式
+```tsx
+/**
+ * ComponentName 組件 - 簡短描述
+ * 
+ * 🎯 這個組件的工作：
+ * 用一句話說明這個組件是做什麼的
+ * 
+ * 🚫 這個組件不做什麼：
+ * - 不處理XXX（說明職責邊界）
+ * - 不處理YYY（避免混淆）
+ * 
+ * ✅ 只負責：
+ * - 具體職責1
+ * - 具體職責2
+ * 
+ * 💡 比喻：就像是XXX，負責YYY，
+ *     不負責ZZZ
+ */
+```
+
+#### 函數/方法注釋格式
+```tsx
+// 🔧 【功能名稱】簡短描述
+const functionName = () => {
+  // 💡 這裡解釋這個函數在做什麼，為什麼需要這樣做
+}
+```
+
+#### 複雜邏輯注釋格式
+```tsx
+// 🔄 【工作步驟】數據處理：說明這段代碼的目的
+const processedData = useMemo(() => {
+  // 📦 這裡我們對數據進行「包裝」
+  return data.map(item => ({
+    ...item,  // 保留原本的內容
+    newField: calculateSomething(item)  // 🎨 新增：計算後的結果
+  }))
+  
+  // 💡 舉例轉換過程：
+  // 輸入：{ name: "測試", type: "basic" }
+  // 輸出：{ name: "測試", type: "basic", color: "green" }
+  
+}, [data])
+```
+
+#### 條件判斷注釋格式
+```tsx
+// 🚦 判斷邏輯：檢查用戶是否已登入
+if (user?.isLoggedIn) {
+  // ✅ 已登入：顯示用戶專屬內容
+  return <UserDashboard />
+} else {
+  // ❌ 未登入：導向登入頁面
+  return <LoginPage />
+}
+```
+
+### 特殊情況注釋規範
+
+#### 1. 技術概念解釋
+當遇到技術概念時，必須提供中文解釋：
+
+```tsx
+// 🌈 這就是gradient！一條彩色的橫線，顯示這個FAQ的分類顏色
+<div className={`bg-gradient-to-r ${faq.gradient}`} />
+{/* 
+  💡 gradient是什麼？
+  - gradient = 漸變色，就是從一個顏色慢慢變到另一個顏色
+  - 比如：from-electric-500 to-cyber-pink-500 = 從藍色漸變到粉紅色
+*/}
+```
+
+#### 2. 數據流動說明
+解釋數據如何在組件間傳遞：
+
+```tsx
+return (
+  <>
+    {/* 🔍 SEO處理：交給專業的FaqSchema組件 */}
+    <FaqSchema faqs={faqs} />
+    {/* 
+      📝 這裡傳入原始的faqs（沒有gradient），因為Google不需要知道顏色，
+          只需要知道問題和答案的內容就好
+    */}
+    
+    {/* 🎨 UI顯示：交給專業的FaqDisplay組件 */}
+    <FaqDisplay faqs={processedFaqs} />
+    {/* 
+      📝 這裡傳入processedFaqs（有gradient），因為UI需要知道每個分類要顯示什麼顏色
+    */}
+  </>
+)
+```
+
+#### 3. 狀態管理說明
+```tsx
+// 📊 狀態管理：追蹤測試進度
+const [testStatus, setTestStatus] = useState<'idle' | 'running' | 'finished'>('idle')
+// 💡 idle = 還沒開始, running = 正在測試, finished = 測試完成
+
+const [results, setResults] = useState<TestResult[]>([])
+// 📈 存儲所有測試結果，每次測試完成都會新增一筆記錄
+```
+
+### 表情符號使用規範
+
+#### 常用表情符號含義
+- 🎯 = 主要功能/目標
+- 🚫 = 不做什麼/邊界
+- ✅ = 負責的職責
+- 💡 = 解釋/比喻
+- 🔧 = 工具函數
+- 🔄 = 數據處理
+- 📦 = 數據包裝
+- 🎨 = UI相關
+- 🔍 = SEO相關
+- 📊 = 狀態管理
+- 📈 = 數據分析
+- 🚦 = 條件判斷
+- 🌈 = 視覺效果
+- 📝 = 說明註解
+- ⚡ = 性能相關
+- 🛡️ = 錯誤處理
+- 📱 = 行動裝置相關
+
+### 實際範例
+
+#### 好的注釋範例
+```tsx
+/**
+ * CpsTestCore 組件 - CPS測試核心引擎
+ * 
+ * 🎯 這個組件的工作：
+ * 計算用戶在指定時間內能點擊多少次滑鼠，就像計時器+計數器的組合
+ * 
+ * 🚫 這個組件不做什麼：
+ * - 不處理UI外觀（由父組件決定）
+ * - 不處理分數保存（由父組件處理）
+ * - 不處理頁面導航（專心測試）
+ * 
+ * ✅ 只負責：
+ * - 計時功能（倒數計時）
+ * - 點擊計數（記錄點擊次數）
+ * - CPS計算（每秒點擊數）
+ * - 測試狀態管理（準備→進行中→完成）
+ * 
+ * 💡 比喻：就像體育測驗的碼錶+計數器，
+ *     只管計時和計數，不管獎牌頒發
+ */
+const CpsTestCore: React.FC<CpsTestProps> = ({ duration, onResultChange }) => {
+  // 📊 測試狀態：追蹤目前是在準備、測試中還是已完成
+  const [status, setStatus] = useState<TestStatus>('idle')
+  // 💡 idle=等待開始, ready=準備中, running=測試中, finished=完成
+  
+  // ⏰ 時間管理：倒數計時器
+  const [timeLeft, setTimeLeft] = useState(duration)
+  // 📈 點擊統計：記錄用戶點了幾次
+  const [clickCount, setClickCount] = useState(0)
+  
+  // 🔧 【核心功能】開始測試
+  const startTest = useCallback(() => {
+    // 🚦 檢查是否已經在測試中，避免重複啟動
+    if (status === 'running') return
+    
+    // 🎬 初始化測試環境
+    setStatus('running')  // 設定狀態為測試中
+    setClickCount(0)      // 重置點擊次數
+    setTimeLeft(duration) // 重置倒數時間
+    
+    // ⏱️ 啟動倒數計時器
+    // 💡 這就像運動會的發令槍，一響就開始計時
+    startTimer()
+  }, [status, duration])
+  
+  // 🔧 【計時邏輯】每秒減少1秒，時間到就停止測試
+  const startTimer = useCallback(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          // ⏰ 時間到！停止測試
+          clearInterval(interval)
+          setStatus('finished')
+          // 📊 計算最終CPS並通知父組件
+          const finalCps = clickCount / duration
+          onResultChange?.({ cps: finalCps, clicks: clickCount })
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000) // 每1000毫秒（1秒）執行一次
+  }, [clickCount, duration, onResultChange])
+}
+```
+
+### 避免的注釋方式
+
+#### ❌ 不好的注釋
+```tsx
+// increment counter
+setCount(count + 1)
+
+// check if valid
+if (data.isValid) {
+  // process data
+  processData(data)
+}
+```
+
+#### ✅ 好的注釋
+```tsx
+// 📈 增加點擊計數：每次用戶點擊就+1
+setCount(count + 1)
+
+// 🚦 資料驗證：確保資料格式正確才處理
+if (data.isValid) {
+  // 🔄 資料處理：轉換成系統需要的格式
+  processData(data)
+}
+```
+
+### 注釋更新原則
+
+1. **代碼修改時必須同步更新注釋**
+2. **新增功能必須添加相應注釋**
+3. **重構時要檢查注釋是否仍然準確**
+4. **刪除代碼時要一併刪除相關注釋**
+
+### 檢查清單
+
+在提交代碼前，確保：
+- [ ] 所有組件都有頂部說明注釋
+- [ ] 複雜邏輯都有步驟說明
+- [ ] 技術術語都有中文解釋
+- [ ] 使用了適當的表情符號
+- [ ] 注釋解釋了「為什麼」而不只是「什麼」
+- [ ] 包含生活化比喻幫助理解
+
+**記住：好的注釋讓代碼像故事書一樣容易閱讀！**
+
 ## Development Guidelines
 
 ### Layout Standardization

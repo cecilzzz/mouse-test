@@ -3,51 +3,44 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { HelpCircle } from 'lucide-react'
 import type { FaqItem } from '@/types'
 
-interface FaqItemWithGradient extends FaqItem {
-  gradient: string
-}
-
 interface FaqDisplayProps {
-  faqs: FaqItemWithGradient[]
+  faqs: FaqItem[]
   title?: string
   description?: string
 }
 
 interface FaqItemDisplayProps {
-  faq: FaqItemWithGradient
+  faq: FaqItem
 }
 
 /**
- * FaqDisplay 組件 - 純粹的FAQ顯示器
+ * FaqItemDisplay 組件 - FAQ單項顯示器
  * 
- * 🎨 這個組件的工作：
- * 把FAQ資料變成美美的網頁內容，就像是「美工」
+ * 🎯 這個組件的工作：
+ * 把單個FAQ問答顯示成統一的cyberpunk風格卡片
  * 
  * 🚫 這個組件不做什麼：
- * - 不處理分類邏輯（不知道什麼是cps、gaming分類）
- * - 不處理顏色計算（期望顏色已經算好）
- * - 不處理SEO（完全不管Google的事）
+ * - 不處理分類邏輯（分類只是資料，不影響顯示）
+ * - 不處理SEO（專心做好UI就好）
+ * - 不做複雜的顏色分類（統一cyberpunk風格）
  * 
  * ✅ 只負責：
- * - 把FAQ內容排版得很漂亮
- * - 顯示問題和答案
- * - 顯示每個分類的彩色橫條（gradient）
+ * - 顯示問題標題（霓虹綠色）
+ * - 顯示答案內容（統一灰色文字）
+ * - 提供cyberpunk hover效果
  * 
- * 💡 比喻：就像印刷廠的工人，只負責把設計好的內容印出來，
- *     不負責設計內容是什麼顏色、什麼內容
+ * 💡 比喻：就像標準化的展示櫥窗，所有商品都用同樣的展示風格
  */
 const FaqItemDisplay: React.FC<FaqItemDisplayProps> = ({ faq }) => (
   <Card className="glass-effect border-electric-500/30 hover:border-neon-green-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-neon-green-500/20">
     <CardHeader className="pb-4">
-      {/* 🌈 這就是gradient！一條彩色的橫線，顯示這個FAQ的分類顏色 */}
-      <div className={`w-full h-1 bg-gradient-to-r ${faq.gradient} rounded-full mb-4`} />
+      {/* 🌈 統一的cyberpunk裝飾線：霓虹綠到電藍的漸變 */}
+      <div className="w-full h-1 bg-gradient-to-r from-neon-green-500 to-electric-500 rounded-full mb-4" />
       {/* 
-        💡 gradient是什麼？
-        - gradient = 漸變色，就是從一個顏色慢慢變到另一個顏色
-        - 比如：from-electric-500 to-cyber-pink-500 = 從藍色漸變到粉紅色
-        - 這條橫線會根據FAQ的分類顯示不同顏色組合
-        - CPS問題 = 藍到粉的橫線
-        - 遊戲問題 = 橙到藍的橫線
+        💡 為什麼用統一的漸變？
+        - 保持整站視覺一致性
+        - 避免過多顏色干擾閱讀
+        - 符合cyberpunk美學風格
       */}
       
       <h3 className="text-xl font-bold font-mono text-neon-green-400 leading-tight">
@@ -64,11 +57,23 @@ const FaqItemDisplay: React.FC<FaqItemDisplayProps> = ({ faq }) => (
 )
 
 /**
- * FaqDisplay - Pure UI Component
+ * FaqDisplay 組件 - FAQ列表顯示器
  * 
- * Renders a list of FAQ items with consistent cyberpunk styling.
- * Expects pre-processed data with category gradients already calculated.
- * Contains zero business logic - only presentation.
+ * 🎯 這個組件的工作：
+ * 把整個FAQ列表排版成美觀的頁面，統一使用cyberpunk風格
+ * 
+ * 🚫 這個組件不做什麼：
+ * - 不處理分類顏色邏輯（統一風格更簡潔）
+ * - 不處理SEO結構化數據（交給專門組件）
+ * - 不做數據加工（純展示組件）
+ * 
+ * ✅ 只負責：
+ * - 顯示標題和描述（cyberpunk風格）
+ * - 渲染FAQ列表（調用FaqItemDisplay）
+ * - 提供響應式布局
+ * 
+ * 💡 比喻：就像展覽館的策展人，負責整體展示效果，
+ *     但不負責製作展品或處理參觀資料
  */
 const FaqDisplay: React.FC<FaqDisplayProps> = ({ 
   faqs, 
