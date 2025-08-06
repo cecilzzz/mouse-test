@@ -91,6 +91,9 @@
     @apply hover:shadow-lg hover:shadow-neon-green-500/25;
     @apply active:animate-click-feedback;
     @apply border-2 border-solid;
+    @apply flex items-center justify-center;
+    min-height: 3rem;
+    min-width: 3rem;
   }
   
   .mouse-button-active {

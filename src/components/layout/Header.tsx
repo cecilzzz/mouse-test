@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X, Mouse, ChevronDown } from 'lucide-react'
 
 const Header = () => {
@@ -12,6 +12,21 @@ const Header = () => {
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
   }
+
+  // Handle ESC key and clicks outside
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveDropdown(null)
+        setIsMenuOpen(false)
+      }
+    }
+
+    if (activeDropdown || isMenuOpen) {
+      document.addEventListener('keydown', handleEscKey)
+      return () => document.removeEventListener('keydown', handleEscKey)
+    }
+  }, [activeDropdown, isMenuOpen])
 
   const cpsTests = [
     { href: '/cps/1-second', label: '1 SECOND CPS' },
@@ -209,11 +224,20 @@ const Header = () => {
       </nav>
 
       {/* Close dropdowns when clicking outside */}
-      {(activeDropdown || isMenuOpen) && (
+      {activeDropdown && (
+        <div 
+          className="fixed inset-0 z-40" 
+          onClick={(e) => {
+            e.stopPropagation()
+            setActiveDropdown(null)
+          }}
+        />
+      )}
+      {isMenuOpen && (
         <div 
           className="fixed inset-0 z-30" 
-          onClick={() => {
-            setActiveDropdown(null)
+          onClick={(e) => {
+            e.stopPropagation()
             setIsMenuOpen(false)
           }}
         />
