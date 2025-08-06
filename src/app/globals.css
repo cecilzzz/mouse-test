@@ -99,7 +99,6 @@
   .mouse-button-active {
     @apply bg-neon-green-500 border-neon-green-400 text-black;
     @apply shadow-lg shadow-neon-green-500/50;
-    @apply animate-pulse;
   }
   
   .mouse-button-inactive {
