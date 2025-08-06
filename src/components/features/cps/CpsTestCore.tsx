@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { RotateCcw, Timer, Play } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { CpsTestResult } from '@/types'
+import type { CpsTestResult } from './types'
+import './styles.css'
 
 interface CpsTestCoreProps {
   duration: number

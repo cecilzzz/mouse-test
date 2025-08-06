@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { MouseButtonState, ClickCount, MouseButtonStats, MouseButtonTestCoreProps } from './types'
+import type { MouseButtonState, ClickCount, MouseButtonTestCoreProps } from './types'
 import './styles.css'
 
 

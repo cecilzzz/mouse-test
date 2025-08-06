@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { RotateCcw, Play, Heart } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { ButterflyClickTestResult } from '@/types'
+import type { ButterflyClickTestResult } from './types'
+import './styles.css'
 
 interface ButterflyClickTestCoreProps {
   duration?: number

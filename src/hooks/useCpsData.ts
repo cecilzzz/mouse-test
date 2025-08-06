@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useLocalStorage } from './useLocalStorage'
-import type { CpsTestResult } from '@/types'
+import type { CpsTestResult } from '@/components/features/cps/types'
 
 interface UseCpsDataProps {
   duration: number

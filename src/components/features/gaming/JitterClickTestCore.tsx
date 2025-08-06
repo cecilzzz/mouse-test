@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { RotateCcw, Play, Zap } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { JitterClickTestResult } from '@/types'
+import type { JitterClickTestResult } from './types'
+import './styles.css'
 
 interface JitterClickTestCoreProps {
   duration?: number

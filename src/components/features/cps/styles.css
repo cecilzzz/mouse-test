@@ -1,0 +1,12 @@
+/**
+ * CPS Test Feature Styles
+ * 
+ * CSS classes specific to CPS testing functionality.
+ */
+
+.cps-counter {
+  @apply font-mono text-4xl font-black tabular-nums;
+  @apply text-neon-green-500 dark:text-neon-green-400;
+  @apply drop-shadow-lg;
+  text-shadow: 0 0 10px currentColor;
+}

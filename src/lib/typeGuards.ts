@@ -10,7 +10,8 @@
  * @author Mouse Test Team
  */
 
-import type { TestResult, CpsTestResult, DpiTestResult } from '@/types'
+import type { TestResult, DpiTestResult } from '@/types'
+import type { CpsTestResult } from '@/components/features/cps/types'
 
 // ============================================================================
 // TYPE GUARD FUNCTIONS
@@ -61,7 +62,7 @@ export function isNotNil<T>(value: T | null | undefined): value is T {
  * };
  * ```
  */
-export function isValidMouseButton(button: string): button is keyof import('@/types').MouseButtonState {
+export function isValidMouseButton(button: string): button is 'left' | 'right' | 'middle' | 'back' | 'forward' {
   return ['left', 'right', 'middle', 'back', 'forward'].includes(button)
 }
 

@@ -7,7 +7,8 @@ import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Timer, Zap, Play } from 'lucide-react'
 import { useCpsTimer } from './hooks/useCpsTimer'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import type { CpsTestResult } from '@/types'
+import type { CpsTestResult } from './types'
+import './styles.css'
 
 interface CpsTestProps {
   duration: number

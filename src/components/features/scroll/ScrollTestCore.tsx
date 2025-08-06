@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { RotateCcw, Play, Mouse, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
-import type { ScrollTestResult } from '@/types'
+import type { ScrollTestResult } from './types'
+import './styles.css'
 
 interface ScrollTestCoreProps {
   duration?: number
