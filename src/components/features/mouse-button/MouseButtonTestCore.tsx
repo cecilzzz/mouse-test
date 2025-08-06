@@ -21,54 +21,16 @@ interface MouseButtonTestCoreProps {
 }
 
 /**
- * MouseButtonTestCore Component
+ * MouseButtonTestCore - 滑鼠按鈕測試器
  * 
- * 純鼠標按鈕測試邏輯組件，不包含佈局。專注於按鈕檢測功能。
- * 通過回調函數與外部組件通信，提供實時統計數據。
- * 
- * @component
- * @example
- * ```tsx
- * <MouseButtonTestCore
- *   onStatsChange={handleStats}
- *   onError={handleError}
- * />
- * ```
- * 
- * @param onStatsChange - 統計數據變化回調
- * @param onError - 錯誤處理回調
- * @param className - 額外CSS類名
- * 
- * @returns {JSX.Element} 純鼠標按鈕測試組件
- * 
- * @features
- * - 純測試邏輯，無佈局干擾
- * - 實時鼠標按鈕檢測（左、右、中、後退、前進）
- * - 視覺反饋和點擊計數
- * - 活動狀態指示
- * - 重置功能
- * - 實時統計數據回調
- * 
- * @design
- * - 專注於核心測試功能
- * - 通過props回調與外部通信
- * - 保持cyberpunk/gaming視覺風格
- * - 可視化鼠標圖表
- * - RGB發光效果當按鈕活動時
+ * 在測試區域內檢測滑鼠按鈕，實時反映按下/彈起狀態
  */
 const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
   onStatsChange,
   onError: _onError, // eslint-disable-line @typescript-eslint/no-unused-vars
   className = ''
 }) => {
-  const [buttonStates, setButtonStates] = useState<MouseButtonState>({
-    left: false,
-    right: false,
-    middle: false,
-    back: false,
-    forward: false
-  })
-
+  // 按鈕點擊計數
   const [clickCounts, setClickCounts] = useState<ClickCount>({
     left: 0,
     right: 0,
@@ -77,74 +39,82 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
     forward: 0
   })
 
-  // Notify parent of stats changes
+  // 按鈕實時按下狀態
+  const [activeButtons, setActiveButtons] = useState<MouseButtonState>({
+    left: false,
+    right: false,
+    middle: false,
+    back: false,
+    forward: false
+  })
+
+  // 根據 event.button 獲取按鈕名稱
+  const getButtonName = useCallback((button: number): keyof MouseButtonState => {
+    switch (button) {
+      case 0: return 'left'
+      case 1: return 'middle'
+      case 2: return 'right'
+      case 3: return 'back'
+      case 4: return 'forward'
+      default: return 'left'
+    }
+  }, [])
+
+  // 滑鼠按下事件 - 高亮按鈕 + 增加計數
+  const handleMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('mousedown', event.button) // debug
+    
+    const buttonName = getButtonName(event.button)
+    
+    // 設置按鈕為激活狀態
+    setActiveButtons(prev => ({ ...prev, [buttonName]: true }))
+    
+    // 增加點擊計數
+    setClickCounts(prev => ({ ...prev, [buttonName]: prev[buttonName] + 1 }))
+  }, [getButtonName])
+
+  // 滑鼠彈起事件 - 取消高亮
+  const handleMouseUp = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('mouseup', event.button) // debug
+    
+    const buttonName = getButtonName(event.button)
+    
+    // 取消按鈕激活狀態
+    setActiveButtons(prev => ({ ...prev, [buttonName]: false }))
+  }, [getButtonName])
+
+  // 劫持右鍵選單
+  const handleContextMenu = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('contextmenu') // debug
+  }, [])
+
+  // 劫持中鍵點擊
+  const handleAuxClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log('auxclick', event.button) // debug
+  }, [])
+
+  // 不需要useEffect，直接在JSX中綁定事件
+
+  // 通知父組件狀態變化
   useEffect(() => {
     const totalClicks = Object.values(clickCounts).reduce((sum, count) => sum + count, 0)
     onStatsChange?.({
       totalClicks,
       buttonCounts: clickCounts,
-      activeButtons: buttonStates
+      activeButtons
     })
-  }, [clickCounts, buttonStates, onStatsChange])
+  }, [clickCounts, activeButtons, onStatsChange])
 
-  const handleMouseDown = useCallback((event: React.MouseEvent) => {
-    event.preventDefault()
-    const button = event.button
-    
-    setButtonStates(prev => {
-      const newState = { ...prev }
-      switch (button) {
-        case 0: newState.left = true; break
-        case 1: newState.middle = true; break
-        case 2: newState.right = true; break
-        case 3: newState.back = true; break
-        case 4: newState.forward = true; break
-      }
-      return newState
-    })
-
-    setClickCounts(prev => {
-      const newCounts = { ...prev }
-      switch (button) {
-        case 0: newCounts.left++; break
-        case 1: newCounts.middle++; break
-        case 2: newCounts.right++; break
-        case 3: newCounts.back++; break
-        case 4: newCounts.forward++; break
-      }
-      return newCounts
-    })
-  }, [])
-
-  const handleMouseUp = useCallback((event: React.MouseEvent) => {
-    event.preventDefault()
-    const button = event.button
-    
-    setButtonStates(prev => {
-      const newState = { ...prev }
-      switch (button) {
-        case 0: newState.left = false; break
-        case 1: newState.middle = false; break
-        case 2: newState.right = false; break
-        case 3: newState.back = false; break
-        case 4: newState.forward = false; break
-      }
-      return newState
-    })
-  }, [])
-
-  const handleContextMenu = useCallback((event: React.MouseEvent) => {
-    event.preventDefault()
-  }, [])
-
+  // 重置測試
   const resetTest = useCallback(() => {
-    setButtonStates({
-      left: false,
-      right: false,
-      middle: false,
-      back: false,
-      forward: false
-    })
     setClickCounts({
       left: 0,
       right: 0,
@@ -152,10 +122,17 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
       back: 0,
       forward: 0
     })
+    setActiveButtons({
+      left: false,
+      right: false,
+      middle: false,
+      back: false,
+      forward: false
+    })
   }, [])
 
   const totalClicks = Object.values(clickCounts).reduce((sum, count) => sum + count, 0)
-  const hasActiveButtons = Object.values(buttonStates).some(state => state)
+  const hasActiveButtons = Object.values(activeButtons).some(state => state)
 
   return (
     <Card className={`test-card ${className}`}>
@@ -169,31 +146,43 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
               MOUSE BUTTON TEST
             </CardTitle>
             <CardDescription className="text-lg mt-1 font-mono text-electric-600 dark:text-electric-400">
-              {'>> Gaming Hardware Diagnostic Tool'}
+              {'>> Mouse Button Diagnostic'}
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-8">
         {/* Mouse Visual */}
-        <div className="flex justify-center">
+        <div className="flex justify-center px-4">
           <div 
-            className="relative bg-black border-2 border-neon-green-500/50 rounded-xl p-8 cursor-pointer select-none w-80 h-96 shadow-xl shadow-neon-green-500/20 hover:shadow-neon-green-500/40 transition-all duration-300"
+            className="relative bg-black border-2 border-neon-green-500/50 rounded-xl p-6 w-full max-w-sm select-none cursor-pointer"
+            style={{ 
+              height: '400px',
+              width: '300px'
+            }}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onContextMenu={handleContextMenu}
+            onAuxClick={handleAuxClick}
           >
             {/* Left Button */}
             <div 
-              className={`absolute top-3 left-3 w-28 h-36 rounded-tl-xl border-2 transition-all duration-150 mouse-button ${
-                buttonStates.left 
+              className={`absolute rounded-tl-xl border-2 mouse-button ${
+                activeButtons.left 
                   ? 'mouse-button-active' 
                   : 'mouse-button-inactive'
               }`}
+              style={{
+                top: '8%',
+                left: '8%',
+                width: '35%',
+                height: '40%'
+              }}
             >
-              <div className="flex flex-col items-center justify-center h-full text-sm font-bold">
-                <span className="mb-2 font-mono">LEFT</span>
-                <Badge variant={buttonStates.left ? "default" : "secondary"} className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
+              <div className="flex flex-col items-center justify-center h-full">
+                <span className="mb-2 font-mono text-sm font-bold">LEFT</span>
+                <Badge variant={activeButtons.left ? "default" : "secondary"} 
+                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
                   {clickCounts.left}
                 </Badge>
               </div>
@@ -201,31 +190,46 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
 
             {/* Right Button */}
             <div 
-              className={`absolute top-3 right-3 w-28 h-36 rounded-tr-xl border-2 transition-all duration-150 mouse-button ${
-                buttonStates.right 
+              className={`absolute rounded-tr-xl border-2 mouse-button ${
+                activeButtons.right 
                   ? 'mouse-button-active' 
                   : 'mouse-button-inactive'
               }`}
+              style={{
+                top: '8%',
+                right: '8%',
+                width: '35%',
+                height: '40%'
+              }}
             >
-              <div className="flex flex-col items-center justify-center h-full text-sm font-bold">
-                <span className="mb-2 font-mono">RIGHT</span>
-                <Badge variant={buttonStates.right ? "default" : "secondary"} className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
+              <div className="flex flex-col items-center justify-center h-full">
+                <span className="mb-2 font-mono text-sm font-bold">RIGHT</span>
+                <Badge variant={activeButtons.right ? "default" : "secondary"} 
+                       className="font-mono text-lg px-3 py-1 bg-black border-2 border-current">
                   {clickCounts.right}
                 </Badge>
               </div>
             </div>
 
-            {/* Middle Button/Scroll Wheel */}
+            {/* Middle Button */}
             <div 
-              className={`absolute top-12 left-1/2 transform -translate-x-1/2 w-10 h-24 rounded-lg border-2 transition-all duration-150 mouse-button ${
-                buttonStates.middle 
+              className={`absolute rounded-lg border-2 mouse-button ${
+                activeButtons.middle 
                   ? 'mouse-button-active' 
                   : 'mouse-button-inactive'
               }`}
+              style={{
+                top: '15%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '18%',
+                height: '30%'
+              }}
             >
-              <div className="flex flex-col items-center justify-center h-full text-xs font-bold">
-                <span className="mb-1 text-center leading-tight font-mono">MID</span>
-                <Badge variant={buttonStates.middle ? "default" : "secondary"} className="font-mono text-sm px-2 py-0.5 bg-black border border-current">
+              <div className="flex flex-col items-center justify-center h-full">
+                <span className="mb-1 font-mono text-xs font-bold">MID</span>
+                <Badge variant={activeButtons.middle ? "default" : "secondary"} 
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
                   {clickCounts.middle}
                 </Badge>
               </div>
@@ -233,15 +237,22 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
 
             {/* Back Button */}
             <div 
-              className={`absolute bottom-20 left-3 w-20 h-14 rounded-lg border-2 transition-all duration-150 mouse-button ${
-                buttonStates.back 
+              className={`absolute rounded-lg border-2 mouse-button ${
+                activeButtons.back 
                   ? 'mouse-button-active' 
                   : 'mouse-button-inactive'
               }`}
+              style={{
+                bottom: '25%',
+                left: '8%',
+                width: '28%',
+                height: '18%'
+              }}
             >
-              <div className="flex flex-col items-center justify-center h-full text-xs font-bold">
-                <span className="mb-1 font-mono">BACK</span>
-                <Badge variant={buttonStates.back ? "default" : "secondary"} className="font-mono text-sm px-2 py-0.5 bg-black border border-current">
+              <div className="flex flex-col items-center justify-center h-full">
+                <span className="mb-1 font-mono text-xs font-bold">BACK</span>
+                <Badge variant={activeButtons.back ? "default" : "secondary"} 
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
                   {clickCounts.back}
                 </Badge>
               </div>
@@ -249,21 +260,28 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
 
             {/* Forward Button */}
             <div 
-              className={`absolute bottom-20 right-3 w-20 h-14 rounded-lg border-2 transition-all duration-150 mouse-button ${
-                buttonStates.forward 
+              className={`absolute rounded-lg border-2 mouse-button ${
+                activeButtons.forward 
                   ? 'mouse-button-active' 
                   : 'mouse-button-inactive'
               }`}
+              style={{
+                bottom: '25%',
+                right: '8%',
+                width: '28%',
+                height: '18%'
+              }}
             >
-              <div className="flex flex-col items-center justify-center h-full text-xs font-bold">
-                <span className="mb-1 font-mono">FWD</span>
-                <Badge variant={buttonStates.forward ? "default" : "secondary"} className="font-mono text-sm px-2 py-0.5 bg-black border border-current">
+              <div className="flex flex-col items-center justify-center h-full">
+                <span className="mb-1 font-mono text-xs font-bold">FWD</span>
+                <Badge variant={activeButtons.forward ? "default" : "secondary"} 
+                       className="font-mono text-xs px-1 py-0.5 bg-black border border-current">
                   {clickCounts.forward}
                 </Badge>
               </div>
             </div>
 
-            {/* Active indicator with RGB effect */}
+            {/* Active indicator */}
             {hasActiveButtons && (
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-rgb-red via-rgb-green to-rgb-blue rounded-full rgb-glow flex items-center justify-center border-2 border-white">
                 <Zap className="w-4 h-4 text-white drop-shadow-lg" />
@@ -288,29 +306,31 @@ const MouseButtonTestCore: React.FC<MouseButtonTestCoreProps> = ({
 
         {/* Total Clicks Display */}
         <div className="text-center">
-          <div className="cps-counter mb-2">{totalClicks}</div>
+          <div className="cps-counter mb-2 text-3xl sm:text-4xl">{totalClicks}</div>
           <p className="text-sm text-muted-foreground font-mono">TOTAL CLICKS</p>
         </div>
 
         {/* Instructions */}
-        <div className="text-center space-y-4 p-6 glass-effect rounded-lg border border-neon-green-500/30">
-          <p className="text-lg font-bold font-mono text-electric-400">{'>> MOUSE BUTTON DIAGNOSTIC PROTOCOL'}</p>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div className="terminal-text">{'> Click any button to test'}</div>
-            <div className="terminal-text">{'> Active buttons glow green'}</div>
-            <div className="terminal-text">{'> Counters track clicks'}</div>
-            <div className="terminal-text">{'> Tests all 5 buttons'}</div>
+        <div className="text-center space-y-4 p-4 sm:p-6 glass-effect rounded-lg border border-neon-green-500/30">
+          <p className="text-lg font-bold font-mono text-electric-400">{'>> MOUSE BUTTON TEST PROTOCOL'}</p>
+          <div className="grid sm:grid-cols-2 gap-3 text-sm">
+            <div className="terminal-text">{'> Click in the mouse area above'}</div>
+            <div className="terminal-text">{'> Real-time button state feedback'}</div>
+            <div className="terminal-text">{'> All mouse buttons supported'}</div>
+            <div className="terminal-text">{'> Click counters track usage'}</div>
           </div>
-          <p className="text-xs text-muted-foreground font-mono">
-            COMPATIBLE: Left | Right | Middle | Back | Forward
-          </p>
+          <div className="text-xs text-muted-foreground font-mono space-y-2">
+            <p className="text-neon-green-400">✓ PRESS: Button lights up immediately</p>
+            <p className="text-electric-400">✓ RELEASE: Button turns off immediately</p>
+            <p className="text-cyber-pink-400">✓ SUPPORTS: Left | Right | Middle | Back | Forward</p>
+          </div>
         </div>
       </CardContent>
     </Card>
   )
 }
 
-// Error boundary wrapper for MouseButtonTestCore
+// Error boundary wrapper
 const MouseButtonTestWithErrorBoundary: React.FC<MouseButtonTestCoreProps> = (props) => (
   <ErrorBoundary>
     <MouseButtonTestCore {...props} />
