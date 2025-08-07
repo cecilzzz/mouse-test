@@ -50,6 +50,8 @@ export const phrases = {
   cpsTest: strong('CPS test'),
   clickSpeed: strong('click speed'),
   mouseTest: strong('mouse test'),
+  mouseTesting: strong('mouse testing'),
+  mouseTestTool: strong('mouse test tool'),
   dpiTest: strong('DPI test'),
   pollingRate: strong('polling rate'),
   mouseButton: strong('mouse button'),
