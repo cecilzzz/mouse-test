@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import Footer from '@/components/layout/Footer'
+import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/Header'
 
 interface TestPageLayoutProps {

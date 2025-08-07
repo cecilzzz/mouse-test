@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import Footer from './Footer'
+import Footer from './footer'
 import Header from './Header'
 
 interface PageLayoutProps {
