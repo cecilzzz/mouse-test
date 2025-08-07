@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Mouse Button Test - Test All Mouse Buttons Online | Left Right Middle Back Forward',
   description: 'Professional mouse button test tool for comprehensive button functionality testing. Test left, right, middle, back, and forward mouse buttons. Free online mouse diagnostic.',
-  keywords: 'mouse button test, button test, mouse test, left click test, right click test, middle click test, mouse buttons, mouse diagnostics, button functionality',
   openGraph: {
     title: 'Mouse Button Test - Professional Mouse Button Diagnostic Tool',
     description: 'Test all your mouse buttons with our comprehensive diagnostic tool. Check left, right, middle, back, and forward button functionality online.',

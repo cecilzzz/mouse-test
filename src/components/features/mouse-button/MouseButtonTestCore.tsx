@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useCallback, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { RotateCcw, Mouse, Zap } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import type { MouseButtonState, ClickCount, MouseButtonTestCoreProps } from './types'

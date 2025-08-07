@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Minecraft CPS Test - Minecraft PvP Click Speed Test for Competitive Play',
   description: 'Professional Minecraft CPS test optimized for PvP combat. Test your clicking speed for Minecraft competitive play with server-specific CPS analysis.',
-  keywords: 'minecraft cps test, minecraft pvp, minecraft click speed, pvp cps test, minecraft combat, competitive minecraft, bedwars cps, skywars cps',
   openGraph: {
     title: 'Minecraft CPS Test - Professional Minecraft PvP Click Speed Test',
     description: 'Optimize your Minecraft PvP performance with our specialized CPS test. Designed for competitive Minecraft players and PvP combat training.',

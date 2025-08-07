@@ -7,10 +7,6 @@ import { cpsRightClickFaqs } from '@/components/features/cps/faq'
 export const metadata: Metadata = {
   title: "Right Click CPS Test - Right Mouse Button Speed Test | Mouse Test",
   description: "Test your right-click speed with our specialized right mouse button CPS test. Perfect for testing right-click performance in gaming and professional use.",
-  keywords: [
-    "right click cps test", "right mouse button test", "right click speed", "rmb cps test", 
-    "right button speed test", "context menu speed", "right click performance"
-  ],
   openGraph: {
     title: "Right Click CPS Test - Right Mouse Button Speed Challenge",
     description: "Test your right mouse button clicking speed. See how fast you can right-click!",

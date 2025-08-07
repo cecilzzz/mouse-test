@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Scroll Wheel Test - Mouse Scroll Functionality & Middle Click Test Online',
   description: 'Professional scroll wheel test tool for mouse diagnostics. Test vertical scrolling, horizontal scrolling, and middle button functionality. Free online scroll wheel diagnostic.',
-  keywords: 'scroll wheel test, mouse scroll test, scroll test, middle click test, mouse wheel, mouse diagnostics, scroll functionality test',
   openGraph: {
     title: 'Scroll Wheel Test - Professional Mouse Scroll Diagnostic',
     description: 'Test your mouse scroll wheel performance with our comprehensive diagnostic tool. Check vertical, horizontal scrolling and middle click functionality.',

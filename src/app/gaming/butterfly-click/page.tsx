@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Butterfly Click Test - Master Butterfly Clicking Technique for Gaming',
   description: 'Professional butterfly click test for gaming performance. Learn and practice butterfly clicking technique with two-finger coordination analysis and feedback.',
-  keywords: 'butterfly click test, butterfly clicking, gaming mouse test, click speed test, butterfly click technique, finger coordination, competitive gaming',
   openGraph: {
     title: 'Butterfly Click Test - Master Two-Finger Clicking Technique',
     description: 'Perfect your butterfly clicking technique with our professional training tool. Designed for sustained gaming performance and finger coordination.',

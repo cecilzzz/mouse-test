@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Jitter Click Test - Master Jitter Clicking Technique for Minecraft PvP',
   description: 'Professional jitter click test for Minecraft PvP and competitive gaming. Learn and practice jitter clicking technique with real-time analysis and feedback.',
-  keywords: 'jitter click test, jitter clicking, minecraft pvp, gaming mouse test, click speed test, jitter click technique, competitive gaming',
   openGraph: {
     title: 'Jitter Click Test - Master Jitter Clicking for Gaming',
     description: 'Perfect your jitter clicking technique with our professional training tool. Designed for Minecraft PvP and competitive gaming performance.',

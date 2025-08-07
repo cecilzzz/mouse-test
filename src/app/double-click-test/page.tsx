@@ -8,7 +8,6 @@ import { links, phrases } from '@/lib/seo-helpers'
 export const metadata: Metadata = {
   title: 'Double Click Test - Mouse Double-Click Speed & Accuracy Test Online',
   description: 'Professional double-click test tool for measuring mouse double-click speed, accuracy, and consistency. Test your mouse buttons for gaming and productivity. Free online double-click diagnostic.',
-  keywords: 'double click test, mouse double click, click speed test, mouse test, double click speed, gaming mouse test, mouse diagnostics, hardware test',
   openGraph: {
     title: 'Double Click Test - Professional Mouse Double-Click Diagnostic',
     description: 'Test your mouse double-click performance with our professional diagnostic tool. Measure speed, accuracy, and consistency for gaming and productivity.',

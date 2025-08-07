@@ -7,10 +7,6 @@ import { cps10SecondFaqs } from '@/components/features/cps/faq'
 export const metadata: Metadata = {
   title: "10 Second CPS Test - Extended Click Speed Test | Mouse Test",
   description: "Test your clicking consistency and endurance with our 10-second CPS test. Perfect for measuring sustained click performance and accuracy.",
-  keywords: [
-    "10 second cps test", "extended cps test", "click endurance test", "sustained click speed", 
-    "10s cps", "consistency test", "endurance clicking"
-  ],
   openGraph: {
     title: "10 Second CPS Test - Endurance Click Speed Challenge",
     description: "Test your clicking endurance and consistency over 10 seconds. Perfect for competitive gaming.",

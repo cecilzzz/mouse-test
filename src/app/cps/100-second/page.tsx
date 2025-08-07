@@ -7,10 +7,6 @@ import { cps100SecondFaqs } from '@/components/features/cps/faq'
 export const metadata: Metadata = {
   title: "100 Second CPS Test - Ultimate Endurance Challenge | Mouse Test",
   description: "The ultimate clicking endurance test. Challenge yourself with 100 seconds of continuous clicking to test your stamina and consistency.",
-  keywords: [
-    "100 second cps test", "endurance cps test", "ultimate click test", "marathon clicking", 
-    "100s cps", "stamina test", "extreme endurance clicking"
-  ],
   openGraph: {
     title: "100 Second CPS Test - Ultimate Endurance Challenge",
     description: "Think you can click for 100 seconds straight? Test your ultimate clicking endurance.",

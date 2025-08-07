@@ -5,13 +5,6 @@ import ErrorBoundary from "@/components/shared/ErrorBoundary";
 export const metadata: Metadata = {
   title: "Mouse Test - Complete Mouse Testing Tools Online | CPS Test, DPI Test, Button Test",
   description: "Complete mouse testing suite with button test, CPS test, DPI analyzer, double click test, and scroll wheel test. Professional diagnostics for gaming mice, wireless mice, and all mouse types. Check performance, accuracy, and speed online instantly.",
-  keywords: [
-    "mouse test", "cps test", "click speed test", "dpi test", "mouse button test", 
-    "double click test", "scroll test", "mouse accuracy", "mouse speed test", 
-    "hz test", "polling rate", "mouse sensor test", "gaming mouse test",
-    "mouse troubleshooting", "mouse problems", "mouse compatibility test",
-    "mouse performance optimization", "competitive gaming mouse", "how to test mouse"
-  ],
   authors: [{ name: "Mouse Test" }],
   openGraph: {
     title: "Mouse Test - Complete Mouse Testing Tools Online",

@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { RotateCcw, Play, Zap } from 'lucide-react'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import type { JitterClickTestResult } from './types'

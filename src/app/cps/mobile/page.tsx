@@ -5,10 +5,6 @@ import CpsTestCore from '@/components/features/cps/CpsTestCore'
 export const metadata: Metadata = {
   title: "Mobile CPS Test - Touch Screen Speed Test | Mouse Test",
   description: "Test your touch screen tapping speed with our mobile CPS test. Perfect for smartphones, tablets, and touchscreen devices.",
-  keywords: [
-    "mobile cps test", "touch screen test", "tap speed test", "mobile clicking", 
-    "smartphone speed test", "tablet test", "touchscreen cps", "finger tapping"
-  ],
   openGraph: {
     title: "Mobile CPS Test - Touch Screen Speed Challenge",
     description: "How fast can you tap your phone screen? Test your mobile tapping speed!",

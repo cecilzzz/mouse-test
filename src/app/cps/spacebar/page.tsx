@@ -5,10 +5,6 @@ import CpsTestCore from '@/components/features/cps/CpsTestCore'
 export const metadata: Metadata = {
   title: "Spacebar CPS Test - Keyboard Speed Test | Mouse Test",
   description: "Test your spacebar clicking speed with our keyboard CPS test. Perfect for testing keyboard responsiveness and finger speed on the space bar.",
-  keywords: [
-    "spacebar cps test", "keyboard speed test", "space bar test", "keyboard cps", 
-    "spacebar speed", "key press speed", "keyboard performance test"
-  ],
   openGraph: {
     title: "Spacebar CPS Test - Keyboard Speed Challenge",
     description: "How fast can you press the spacebar? Test your keyboard speed with our spacebar CPS test.",
